@@ -14,7 +14,7 @@ public class RoomSwitch : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("2")){
-            this.transform.position = new Vector3(38f, 1f, -10f);
+            this.transform.position = new Vector3(88f, 1f, -10f);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)){
