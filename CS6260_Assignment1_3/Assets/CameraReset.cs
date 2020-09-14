@@ -17,8 +17,11 @@ public class CameraReset : MonoBehaviour
         {
             Debug.Log("from position:" + this.transform.position);
             this.GetComponent<OVRPlayerController>().enabled = false;
+            this.GetComponent<CharacterController>().enabled = false;
             this.transform.position = new Vector3(0f, 2f, 0f);
             this.GetComponent<OVRPlayerController>().enabled = true;
+            this.GetComponent<CharacterController>().enabled = true;
+
 
         }
     }
