@@ -16,7 +16,10 @@ public class CameraReset : MonoBehaviour
         if (Input.GetKeyDown("tab"))
         {
             Debug.Log("from position:" + this.transform.position);
-            this.transform.position = new Vector3(0f, 0f, 0f);
+            this.GetComponent<OVRPlayerController>().enabled = false;
+            this.transform.position = new Vector3(0f, 2f, 0f);
+            this.GetComponent<OVRPlayerController>().enabled = true;
+
         }
     }
 }
