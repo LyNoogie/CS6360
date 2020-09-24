@@ -42,8 +42,13 @@ public class light_trigger : MonoBehaviour
         {
             if (light_t.enabled == true)
             {
-                Debug.Log("Triggered on light!");
-                game.updateScore();
+                //todo: controller input
+                if (Input.GetKeyDown("f"))
+                {
+                    Debug.Log("Triggered on light!");
+                    game.updateScore();
+                }
+                
                 
             }
         }

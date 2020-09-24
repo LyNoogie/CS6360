@@ -29,6 +29,7 @@ public class light_game : MonoBehaviour
         currentLight = Random.Range(minIndex, maxIndex);
         lightObjs[currentLight].GetComponent<Light>().enabled = true;
         timer = 0;
+        score_text.text = score.ToString();
 
     }
 
@@ -63,6 +64,7 @@ public class light_game : MonoBehaviour
             timer = 0;
         }
 
+        //Todo: exit button
     }
 
   
