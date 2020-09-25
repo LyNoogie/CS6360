@@ -2051,13 +2051,15 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 50
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'u0822847
+  m_Text: 'Team Unids:
+
+    u0822847
 
     u0972427
 
@@ -2068,13 +2070,17 @@ MonoBehaviour:
     u0940253
 
 
+    Instructions:
 
-    tab
-    = light switch
+    press
+    ''tab'' to change light color
 
-    2 key = switch scenes
+    press ''2'' to teleport to scene 2
 
-    esc = exits game'
+    press
+    ''1'' to return
+
+    press ''esc'' to exit game'
 --- !u!222 &1837089833
 CanvasRenderer:
   m_ObjectHideFlags: 0
