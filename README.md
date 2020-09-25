@@ -15,12 +15,13 @@ Alec Nelson
 
 Xuan Huang
 
+### Links
 
+[Part 1](./CS6360_Assignment1-1)
 
-### Special Instructions
+[Part 2](./CS6360_Assignment1-2)
 
-For this project we used an Oculus Rift S headset to compile and test.
+[Part 3](./CS6360_Assignment1-2)
 
-Part 2 - To increase your score in the light game press either the left or right index trigger on an Oculus Touch controller.
+[Source Code](./src)
 
-Part 3 - Press 'r' on the keyboard to toggle rotation tracking, 'p' to toggle position tracking, and the 'b' key to toggle both position and rotation tracking.
