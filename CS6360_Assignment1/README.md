@@ -21,7 +21,7 @@ Xuan Huang
 
 [Part 2](./CS6360_Assignment1-2)
 
-[Part 3](./CS6360_Assignment1-2)
+[Part 3](./CS6360_Assignment1-3)
 
 [Source Code](./src)
 
