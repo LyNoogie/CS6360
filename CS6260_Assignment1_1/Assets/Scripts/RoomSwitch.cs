@@ -14,11 +14,19 @@ public class RoomSwitch : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("2")){
+            this.GetComponent<OVRPlayerController>().enabled = false;
+            this.GetComponent<CharacterController>().enabled = false;
             this.transform.position = new Vector3(88f, 1f, -10f);
+            this.GetComponent<OVRPlayerController>().enabled = true;
+            this.GetComponent<CharacterController>().enabled = true;
         }
 
         if (Input.GetKeyDown("1")) {
+            this.GetComponent<OVRPlayerController>().enabled = false;
+            this.GetComponent<CharacterController>().enabled = false;
             this.transform.position = new Vector3(0f, 1f, 0f);
+            this.GetComponent<OVRPlayerController>().enabled = true;
+            this.GetComponent<CharacterController>().enabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)){

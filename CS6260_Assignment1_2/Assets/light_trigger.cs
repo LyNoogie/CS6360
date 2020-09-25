@@ -42,12 +42,17 @@ public class light_trigger : MonoBehaviour
         {
             if (light_t.enabled == true)
             {
-                //todo: controller input
-                if (Input.GetKeyDown("f"))
-                {
+                if (OVRInput.Get(OVRInput.RawButton.LIndexTrigger) || OVRInput.Get(OVRInput.RawButton.RIndexTrigger)){
                     Debug.Log("Triggered on light!");
                     game.updateScore();
                 }
+
+                //todo: controller input
+                // if (Input.GetKeyDown("f"))
+                // {
+                //     Debug.Log("Triggered on light!");
+                //     game.updateScore();
+                // }
                 
                 
             }

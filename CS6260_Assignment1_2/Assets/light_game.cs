@@ -26,7 +26,11 @@ public class light_game : MonoBehaviour
         Debug.Log("Score is " + score);
         Debug.Log("current light is " + currentLight);
         lightObjs[currentLight].GetComponent<Light>().enabled = false;
-        currentLight = Random.Range(minIndex, maxIndex);
+        int nextLight = Random.Range(minIndex, maxIndex);
+        while(nextLight == currentLight){
+            nextLight = Random.Range(minIndex, maxIndex);
+        }
+        currentLight = nextLight;
         lightObjs[currentLight].GetComponent<Light>().enabled = true;
         timer = 0;
         score_text.text = score.ToString();
@@ -59,7 +63,11 @@ public class light_game : MonoBehaviour
         if (timer > 3.0f)
         {
             lightObjs[currentLight].GetComponent<Light>().enabled = false;
-            currentLight = Random.Range(minIndex, maxIndex);
+            int nextLight = Random.Range(minIndex, maxIndex);
+            while(nextLight == currentLight){
+                nextLight = Random.Range(minIndex, maxIndex);
+            }
+            currentLight = nextLight;
             lightObjs[currentLight].GetComponent<Light>().enabled = true;
             timer = 0;
         }
