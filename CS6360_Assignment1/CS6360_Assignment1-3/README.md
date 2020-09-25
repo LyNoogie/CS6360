@@ -8,6 +8,7 @@ We have all contributed to this code in an equitable manner and agree that, to t
 * Pressing 'm' will toggle the user between two modes:
     - mirroring the users movements
     - matching the users movements
+    
 **Bonus:**
 * Pressing the 'r' key will toggle rotational tracking
 * Pressing the 'p' key will toggle positional tracking
