@@ -6,7 +6,7 @@ Joshua Morrell\
 Torin McDonald\
 Ly Nguyen\
 Alec Nelson\
-Xuan Huang\
+Xuan Huang
 
 ### Links
 [Part 1](./CS6360_Assignment1-1)\
