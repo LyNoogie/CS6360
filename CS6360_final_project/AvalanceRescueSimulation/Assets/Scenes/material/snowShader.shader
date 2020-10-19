@@ -1,6 +1,6 @@
 ﻿    Shader "Tessellation Sample" {
         Properties {
-            _Tess ("Tessellation", Range(1,32)) = 8
+            _Tess ("Tessellation", Range(1,64)) = 8
             _MainTex ("Base (RGB)", 2D) = "white" {}
             _DispTex ("Disp Texture", 2D) = "gray" {}
             _TerrainDispTex ("Terrain Disp Texture", 2D) = "gray" {}
