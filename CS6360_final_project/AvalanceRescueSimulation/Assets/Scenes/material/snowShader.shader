@@ -59,7 +59,7 @@
             void surf (Input IN, inout SurfaceOutput o) {
                 half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
                 float h = IN.color.x;
-                o.Albedo = c.rgb * (1-h*0.02);
+                o.Albedo = c.rgb * (1-h*1.5);
                 o.Specular = 0.2;
                 o.Gloss = 1.0;
                 o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
