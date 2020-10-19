@@ -15,7 +15,7 @@
             LOD 100
             
             CGPROGRAM
-            #pragma surface surf BlinnPhong addshadow fullforwardshadows vertex:disp tessellate:tessFixed nolightmap
+            #pragma surface surf BlinnPhong addshadow fullforwardshadows tessellate:tessFixed nolightmap vertex:disp 
             #pragma target 4.6
 
             struct appdata {
@@ -23,6 +23,12 @@
                 float4 tangent : TANGENT;
                 float3 normal : NORMAL;
                 float2 texcoord : TEXCOORD0;
+            };
+
+
+            struct Input {
+                float2 uv_MainTex;
+                fixed4 color:COLOR;
             };
 
             float _Tess;
@@ -37,16 +43,14 @@
             float _Displacement;
             float _TerrainDisplacement;
 
-            void disp (inout appdata v)
+            void disp (inout appdata_full v)
             {
                 float d = (tex2Dlod(_DispTex, float4(v.texcoord.x, v.texcoord.y, 0,0)).r)* _Displacement;
                 float d_t = 2*(tex2Dlod(_TerrainDispTex, float4(v.texcoord.xy, 0,0)).r - 0.5)* _TerrainDisplacement;
                 v.vertex.y -= (d-d_t);
+                v.color = float4 (d,0,0,0); // a bug in unity: conflicts veretx shader & tess shader, use COLOR to store dispalcement 
             }
 
-            struct Input {
-                float2 uv_MainTex;
-            };
 
             sampler2D _MainTex;
             sampler2D _NormalMap;
@@ -54,7 +58,8 @@
 
             void surf (Input IN, inout SurfaceOutput o) {
                 half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-                o.Albedo = c.rgb;
+                float h = IN.color.x;
+                o.Albedo = c.rgb * (1-h*0.02);
                 o.Specular = 0.2;
                 o.Gloss = 1.0;
                 o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
