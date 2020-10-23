@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Numerics;
+// using System.Numerics;
 using System;
 
 
 
 public class transmitting_script : MonoBehaviour
 {
-    private List<Tuple<double, double>> coords;
-    private List<Tuple<double, double>> vectors;
-    private List<double> arcs;
+    private List<Vector3> coords;
+    private List<Vector3> vectors;
+    private List<float> arcs;
     Transform player_trans;
 
     private OVRPlayerController player;
@@ -20,9 +20,9 @@ public class transmitting_script : MonoBehaviour
     public 
     void Start()
     {
-        coords = new List<Tuple<double, double>>();
-        vectors = new List<Tuple<double, double>>();
-        arcs = new List<double>();
+        coords = new List<Vector3>();
+        vectors = new List<Vector3>();
+        arcs = new List<float>();
         LoadData();
         Debug.Log(coords.Count);
         Debug.Log(vectors.Count);
@@ -55,8 +55,8 @@ public class transmitting_script : MonoBehaviour
 
         var current_vec = vectors[min_index];
 
-        double vx = current_vec.Item1;
-        double vy = current_vec.Item2;
+        float vx = current_vec.x;
+        float vy = current_vec.y;
 
         double vector_degree = Math.Atan(vx / vy)*(180/Math.PI); //return degrees
 
@@ -76,10 +76,9 @@ public class transmitting_script : MonoBehaviour
         while ((line = reader.ReadLine()) != null)
         {
             string[] items = line.Split(' ');
-            //Debug.Log(items.Length);
-            double x = double.Parse(items[0]);
-            double y = double.Parse(items[1]);
-            Tuple<double, double> t = new Tuple<double, double>(x, y);
+            float x = float.Parse(items[0]);
+            float y = float.Parse(items[1]);
+            Vector3 t = new Vector3(x, y, 0.0f);
             coords.Add(t);
 
         }
@@ -90,9 +89,9 @@ public class transmitting_script : MonoBehaviour
         while ((line = reader.ReadLine()) != null)
         {
             string[] items = line.Split(' ');
-            double x = double.Parse(items[0]);
-            double y = double.Parse(items[1]);
-            Tuple<double,double> t= new Tuple<double,double>(x, y);
+            float x = float.Parse(items[0]);
+            float y = float.Parse(items[1]);
+            Vector3 t = new Vector3(x, y, 0.0f);
             vectors.Add(t);
 
         }
@@ -102,7 +101,7 @@ public class transmitting_script : MonoBehaviour
         while ((line = reader.ReadLine()) != null)
         {
             string[] items = line.Split(' ');
-            double dist = double.Parse(items[0]);
+            float dist = float.Parse(items[0]);
             arcs.Add(dist);
 
         }
@@ -112,10 +111,9 @@ public class transmitting_script : MonoBehaviour
     {
         for (int i = 0; i < coords.Count; i++)
         {
-            Color color = new Color(0.0f, 0.0f, 1.0f);
-            
-            var start = coords[i];
-            Debug.DrawLine(new UnityEngine.Vector3((float)start.Item1, (float)start.Item2,0), new UnityEngine.Vector3((float)(coords[i].Item1+vectors[i].Item1), (float)(coords[i].Item2+vectors[i].Item2), 0.0f) , color,1000.0f);
+            Color color = new Color(0.0f, 0.0f, 1.0f);     
+            var start = coords[i];   
+            Debug.DrawLine(new Vector3(start.x, start.y , 0.0f), new Vector3(coords[i].x + vectors[i].x, coords[i].y + vectors[i].y, 0.0f) , color, 1000.0f);
         }
     }
     
@@ -125,10 +123,9 @@ public class transmitting_script : MonoBehaviour
         int index = -1;
         for(int i=0; i < coords.Count; i++)
         {
-            //Debug.Log(Math.Sqrt(Math.Pow(x - coords[i].Item1, 2) + Math.Pow(y - coords[i].Item2, 2)));
-            if(Math.Sqrt(Math.Pow(x-coords[i].Item1,2)+ Math.Pow(y - coords[i].Item2, 2)) < min_dist)
+            if(Math.Sqrt(Math.Pow(x - coords[i].x, 2) + Math.Pow(y - coords[i].y, 2)) < min_dist)
             {
-                min_dist = Math.Sqrt(Math.Pow(x - coords[i].Item1, 2) + Math.Pow(y - coords[i].Item2, 2));
+                min_dist = Math.Sqrt(Math.Pow(x - coords[i].x, 2) + Math.Pow(y - coords[i].y, 2));
                 index = i;
             }
         }
