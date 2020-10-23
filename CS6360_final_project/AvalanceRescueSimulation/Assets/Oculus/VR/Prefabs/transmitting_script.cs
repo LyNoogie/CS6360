@@ -31,11 +31,6 @@ public class transmitting_script : MonoBehaviour
         CreateArrows();
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
-        if (player == null)
-        {
-            Debug.Log("asdfSDf");
-        }
-
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
         //Debug.Log(t.)
 
@@ -52,40 +47,42 @@ public class transmitting_script : MonoBehaviour
         //float z = player.transform.position.z;
         int min_index = GetClosestVector(player_trans.position.x, player_trans.position.y, player_trans.position.z);
 
-        var current_vec = vectors[min_index];
-
-        float vx = current_vec.x;
-        float vz = current_vec.z;
+        var closest_vector = vectors[min_index];
+        float vx = closest_vector.x;
+        float vz = closest_vector.z;
         double vector_degree;
 
-        //In calculations below, 0 should be replaced with worldspace angle/direction of player
-
-        // if vx, vz > 0, vector_degree = 0 + (90 - Math.Atan(vz / vx)*(180/Math.PI))
         if (vx > 0 & vz > 0) 
         {
             vector_degree = 90 - Math.Atan(vz / vx)*(180/Math.PI);
         }
-        // if vx > 0, vz < 0, vector_degree = 90 + (Math.Atan(vz / vx)*(180/Math.PI))
         else if(vx > 0 & vz < 0)
         {
-            vector_degree = 90 + (Math.Atan(vz / vx)*(180/Math.PI));
+            vector_degree = 90 + (Math.Atan(Math.Abs(vz / vx))*(180/Math.PI));
         }
-        // if vx < 0, vz < 0, vector_degree = 180 + (90 - Math.Atan(vz / vx)*(180/Math.PI))
         else if(vx < 0 & vz < 0)
         {
             vector_degree = 180 + (90 - Math.Atan(vz / vx)*(180/Math.PI));
         }
-        // if vx < 0, vz > 0, vector_degree = 270 + (Math.Atan(vz / vx)*(180/Math.PI))
         else 
         {
-            vector_degree = 270 + (Math.Atan(vz / vx)*(180/Math.PI));
+            vector_degree = 270 + (Math.Atan(Math.Abs(vz / vx))*(180/Math.PI));
         }
 
+        // Debug.Log("world space vector angle");
+        // Debug.Log(vector_degree);
 
-        // double vector_degree = Math.Atan(vz / vx)*(180/Math.PI); //return degrees
+        Vector3 player_direction = player_trans.eulerAngles;
+        // Debug.Log("world space player angle");
+        // Debug.Log(player_direction);
 
-        //Vector3 player_direction = player_trans.eulerAngles;
-        Debug.Log(vector_degree);
+        // From player's initial "forward" direction, if they turn a little bit left, their angle is ~= 355 degrees
+        // If they turn right, their angle is ~= 5 degrees
+        // TO DO:  Account for this in calculation of angle_from_beacon
+        double angle_from_beacon = player_direction.y - vector_degree;
+        Debug.Log("angle of signal direction from beacon");
+        Debug.Log(angle_from_beacon);
+        
 
         // var y_rotation = player_trans.rotation.y;
         // Debug.Log(y_rotation);
