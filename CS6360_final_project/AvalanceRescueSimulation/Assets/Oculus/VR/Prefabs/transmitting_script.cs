@@ -79,7 +79,15 @@ public class transmitting_script : MonoBehaviour
         // From player's initial "forward" direction, if they turn a little bit left, their angle is ~= 355 degrees
         // If they turn right, their angle is ~= 5 degrees
         // TO DO:  Account for this in calculation of angle_from_beacon
-        double angle_from_beacon = player_direction.y - vector_degree;
+        double angle_from_beacon = vector_degree - player_direction.y;
+
+        if (angle_from_beacon < -180) {
+            angle_from_beacon = 360 - Math.Abs(angle_from_beacon);
+        } 
+        else if (angle_from_beacon > 180) {
+            angle_from_beacon = (360 - angle_from_beacon) * -1;
+        }
+
         Debug.Log("angle of signal direction from beacon");
         Debug.Log(angle_from_beacon);
         
