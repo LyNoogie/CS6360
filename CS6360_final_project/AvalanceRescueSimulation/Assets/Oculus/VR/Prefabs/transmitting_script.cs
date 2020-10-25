@@ -32,22 +32,15 @@ public class transmitting_script : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        //Debug.Log(t.)
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //var pos=player.transform.position;
         Transform t = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
-        //float x =player.transform.position.x;
-        //float y = player.transform.position.y;
-        //float z = player.transform.position.z;
         int min_index = GetClosestVector(player_trans.position.x, player_trans.position.y, player_trans.position.z);
-
-        var closest_vector = vectors[min_index];
+        Vector3 closest_vector = vectors[min_index];
+        float arc_length = arcs[min_index];
         float vx = closest_vector.x;
         float vz = closest_vector.z;
         double vector_degree;
@@ -69,16 +62,7 @@ public class transmitting_script : MonoBehaviour
             vector_degree = 270 + (Math.Atan(Math.Abs(vz / vx))*(180/Math.PI));
         }
 
-        // Debug.Log("world space vector angle");
-        // Debug.Log(vector_degree);
-
         Vector3 player_direction = player_trans.eulerAngles;
-        // Debug.Log("world space player angle");
-        // Debug.Log(player_direction);
-
-        // From player's initial "forward" direction, if they turn a little bit left, their angle is ~= 355 degrees
-        // If they turn right, their angle is ~= 5 degrees
-        // TO DO:  Account for this in calculation of angle_from_beacon
         double angle_from_beacon = vector_degree - player_direction.y;
 
         if (angle_from_beacon < -180) {
@@ -88,16 +72,8 @@ public class transmitting_script : MonoBehaviour
             angle_from_beacon = (360 - angle_from_beacon) * -1;
         }
 
-        Debug.Log("angle of signal direction from beacon");
-        Debug.Log(angle_from_beacon);
-        
-
-        // var y_rotation = player_trans.rotation.y;
-        // Debug.Log(y_rotation);
-        //Debug.Log(vector_degree);
-
-
-        
+        Debug.Log("Angle of signal direction from beacon: " + angle_from_beacon);
+        Debug.Log("Distance to source: " + arc_length);
     }
 
     void LoadData()
@@ -116,7 +92,6 @@ public class transmitting_script : MonoBehaviour
         reader.Close();
         reader = File.OpenText("vectors.txt");
         
-
         while ((line = reader.ReadLine()) != null)
         {
             string[] items = line.Split(' ');
@@ -134,10 +109,9 @@ public class transmitting_script : MonoBehaviour
             string[] items = line.Split(' ');
             float dist = float.Parse(items[0]);
             arcs.Add(dist);
-
         }
-
     }
+
     void CreateArrows()
     {
         for (int i = 0; i < coords.Count; i++)
