@@ -24,9 +24,14 @@ def ellipse(a, b, n, right=True):
         eqn = lambda tt: np.sqrt(a**2 * math.sin(tt)**2 + b**2 * math.cos(tt)**2)
         if right:
             t_init = math.pi
+            d = integrate.quad(eqn, t_init, t)[0]
+            if d < 0:
+                half_len = integrate.quad(eqn, 0, math.pi)[0]
+                d = half_len + (half_len + d)
+            arcs.append(d)
         else:
             t_init = 0
-        arcs.append(abs(integrate.quad(eqn, t_init, t)[0]))
+            arcs.append(abs(integrate.quad(eqn, t_init, t)[0]))
         x_coord.append(x)
         y_coord.append(y)
     return x_coord, y_coord, arcs
