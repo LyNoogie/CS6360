@@ -16,6 +16,9 @@ public class transmitting_script : MonoBehaviour
 
     private OVRPlayerController player;
     private GameObject playerObj = null;
+    public static double angle_from_beacon;
+    public static float arc_length;
+
     // Start is called before the first frame update
     public 
     void Start()
@@ -24,9 +27,6 @@ public class transmitting_script : MonoBehaviour
         vectors = new List<Vector3>();
         arcs = new List<float>();
         LoadData();
-        Debug.Log(coords.Count);
-        Debug.Log(vectors.Count);
-        Debug.Log(arcs.Count);
         TransformData();
         CreateArrows();
         playerObj = GameObject.FindWithTag("Player");
@@ -40,7 +40,7 @@ public class transmitting_script : MonoBehaviour
         Transform t = GameObject.FindWithTag("Player").GetComponent<Transform>();
         int min_index = GetClosestVector(player_trans.position.x, player_trans.position.y, player_trans.position.z);
         Vector3 closest_vector = vectors[min_index];
-        float arc_length = arcs[min_index];
+        arc_length = arcs[min_index];
         float vx = closest_vector.x;
         float vz = closest_vector.z;
         double vector_degree;
@@ -63,7 +63,7 @@ public class transmitting_script : MonoBehaviour
         }
 
         Vector3 player_direction = player_trans.eulerAngles;
-        double angle_from_beacon = vector_degree - player_direction.y;
+        angle_from_beacon = vector_degree - player_direction.y;
 
         if (angle_from_beacon < -180) {
             angle_from_beacon = 360 - Math.Abs(angle_from_beacon);
@@ -72,8 +72,8 @@ public class transmitting_script : MonoBehaviour
             angle_from_beacon = (360 - angle_from_beacon) * -1;
         }
 
-        Debug.Log("Angle of signal direction from beacon: " + angle_from_beacon);
-        Debug.Log("Distance to source: " + arc_length);
+        // Debug.Log("Angle of signal direction from beacon: " + angle_from_beacon);
+        // Debug.Log("Distance to source: " + arc_length);
     }
 
     void LoadData()
