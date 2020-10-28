@@ -509,7 +509,7 @@ BoxCollider:
   m_GameObject: {fileID: 834344533}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.99, y: 0.48, z: 3.46}
   m_Center: {x: 0, y: 0, z: 0}
@@ -546,11 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b387d8afcdab647bb0ccd6fd593083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beaconVec: {x: 0, y: 0, z: 0}
+  bHeight: 0
   beaconMag: 11.64
   beaconAngle: {x: 0, y: 51.41, z: 0, w: 0}
   player: {fileID: 0}
-  bOffset: 1
 --- !u!1 &1195082936
 GameObject:
   m_ObjectHideFlags: 0

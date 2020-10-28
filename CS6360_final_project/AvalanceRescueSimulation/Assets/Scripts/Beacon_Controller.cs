@@ -5,11 +5,12 @@ using UnityEngine;
 public class Beacon_Controller : MonoBehaviour
 {
 
-    public Vector3 beaconVec;
+    public float bHeight;
     public float beaconMag;
     public Quaternion beaconAngle;
     public GameObject player;
-    private float bOffset = 1.0f;
+    public float bForward;
+    
 
     GameObject b1;
     GameObject b2;
@@ -23,9 +24,9 @@ public class Beacon_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        bForward = 1.0f;
         player = GameObject.Find("OVRCameraRig");
-        this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.2f, player.transform.position.z) + player.transform.forward*bOffset;
+        this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + bHeight - 0.2f, player.transform.position.z ) + player.transform.forward * bForward;
         this.transform.rotation = player.transform.rotation;
         this.transform.Rotate(0f, 0f, 180f);
 
