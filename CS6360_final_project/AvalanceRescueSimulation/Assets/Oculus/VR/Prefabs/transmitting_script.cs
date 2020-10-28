@@ -12,6 +12,9 @@ public class transmitting_script : MonoBehaviour
     private List<Vector3> vectors;
     private List<float> arcs;
     Transform player_trans;
+    Transform controller_trans;
+    Transform used_transform;
+
 
     private OVRPlayerController player;
     private GameObject playerObj = null;
@@ -37,18 +40,32 @@ public class transmitting_script : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        OVRInput.Update();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Transform t = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        CheckDistToSource();
+        //int min_index;
+        OVRInput.Update();
+        if (Input.GetJoystickNames()[1] == "")
+        {
+            used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        }
+        else
+        {
+            //used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+            used_transform = GameObject.FindWithTag("RightHandAnchor").GetComponent<Transform>();
+            //used_transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
+            //used_transform.position= OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+        }
+        CheckDistToSource(used_transform);
         if (outsideRange) {
             return;
         }
+        int min_index= GetClosestVector(used_transform.position.x, used_transform.position.y, used_transform.position.z);
 
-        int min_index = GetClosestVector(player_trans.position.x, player_trans.position.y, player_trans.position.z);
         Vector3 closest_vector = vectors[min_index];
         arc_length = arcs[min_index];
         float vx = closest_vector.x;
@@ -76,7 +93,7 @@ public class transmitting_script : MonoBehaviour
             //Debug.Log("SAFE");
         }
 
-        Vector3 player_direction = player_trans.eulerAngles;
+        Vector3 player_direction = used_transform.eulerAngles;
         angle_from_beacon = vector_degree - player_direction.y;
 
         if (angle_from_beacon < -180) {
@@ -172,9 +189,17 @@ public class transmitting_script : MonoBehaviour
         }     
     }
 
-    void CheckDistToSource()
+    void CheckDistToSource(Transform t)
     {
-        double dist = Math.Sqrt(Math.Pow(player_trans.position.x - beaconPos.x, 2) + Math.Pow(player_trans.position.z - beaconPos.z, 2));
+        double dist;
+        if (Input.GetJoystickNames()[1] == "") { 
+            dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
+        }
+        else
+        {
+            dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
+
+        }
         outsideRange = dist > 55 ? true : false;
     }
 }
