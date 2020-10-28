@@ -53,8 +53,8 @@ public class Beacon_Controller : MonoBehaviour
 
         if (Input.GetJoystickNames()[1] == "")
         {
-            Debug.Log("forward: " + player.transform.forward * bOffset);
-            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bOffset;
+            Debug.Log("forward: " + player.transform.forward * bForward);
+            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bForward;
             this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
             //this.transform.Rotate(0f, 180f, 0f);
             //float yAngle = this.transform.rotation.eulerAngles.y - beaconAngle.eulerAngles.y;
@@ -63,6 +63,7 @@ public class Beacon_Controller : MonoBehaviour
         else
         {
             Transform t= GameObject.FindWithTag("RightHandAnchor").GetComponent<Transform>();
+
 
             //this.transform.position = t.position;
             this.transform.position = new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z);
