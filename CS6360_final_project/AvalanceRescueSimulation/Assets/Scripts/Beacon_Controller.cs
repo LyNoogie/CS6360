@@ -5,7 +5,7 @@ using UnityEngine;
 public class Beacon_Controller : MonoBehaviour
 {
 
-    public float bHeight;
+    private float bHeight = 0.1f;
     public float beaconMag;
     public Quaternion beaconAngle;
     public GameObject player;
@@ -49,10 +49,8 @@ public class Beacon_Controller : MonoBehaviour
         float arc_length = transmitting_script.arc_length;
         bool outsideRange = transmitting_script.outsideRange;
 
-
-        Debug.Log("forward: " + player.transform.forward * bForward);
         this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + bHeight - 0.2f, player.transform.position.z) + player.transform.forward * bForward; this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
-        //this.transform.Rotate(0f, 180f, 0f);
+        this.transform.Rotate(10f, 0f, 0f);
         //float yAngle = this.transform.rotation.eulerAngles.y - beaconAngle.eulerAngles.y;
         //float tAngle = beaconAngle.eulerAngles.y;
 
