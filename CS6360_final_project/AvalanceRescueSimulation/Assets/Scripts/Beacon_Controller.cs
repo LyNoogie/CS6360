@@ -46,22 +46,23 @@ public class Beacon_Controller : MonoBehaviour
     {
         double signal_angle = transmitting_script.angle_from_beacon;
         float arc_length = transmitting_script.arc_length;
+        bool outsideRange = transmitting_script.outsideRange;
 
         this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bOffset;
         this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
         //this.transform.Rotate(0f, 180f, 0f);
-
-        Debug.Log("signal angle: " + signal_angle);
-
         //float yAngle = this.transform.rotation.eulerAngles.y - beaconAngle.eulerAngles.y;
         //float tAngle = beaconAngle.eulerAngles.y;
-
 
         b1.GetComponent<Renderer>().material = unlitMat;
         b2.GetComponent<Renderer>().material = unlitMat;
         b3.GetComponent<Renderer>().material = unlitMat;
         b4.GetComponent<Renderer>().material = unlitMat;
         b5.GetComponent<Renderer>().material = unlitMat;
+
+        if (outsideRange) {
+            return;
+        }
 
         if (signal_angle >= 60f)
         {
@@ -84,8 +85,8 @@ public class Beacon_Controller : MonoBehaviour
             b5.GetComponent<Renderer>().material = litMat;
         }
 
-        //text.GetComponent<UnityEngine.UI.Text>().text = beaconMag.ToString("F1");
-        text.GetComponent<UnityEngine.UI.Text>().text = arc_length.ToString("F1");
+        text.GetComponent<UnityEngine.UI.Text>().text = outsideRange ? "" : arc_length.ToString("F1") ;
+        Debug.Log("Outside Range: " + outsideRange);
 
         //switch (yAngle)
         //{

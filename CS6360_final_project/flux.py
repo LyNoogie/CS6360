@@ -25,9 +25,11 @@ def ellipse(a, b, n, right=True):
         if right:
             t_init = math.pi
             d = integrate.quad(eqn, t_init, t)[0]
-            if d < 0:
+            if d > 0:
                 half_len = integrate.quad(eqn, 0, math.pi)[0]
-                d = half_len + (half_len + d)
+                d = half_len + (half_len - d)
+            else:
+                d = abs(d)
             arcs.append(d)
         else:
             t_init = 0

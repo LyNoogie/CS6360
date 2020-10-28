@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-// using System.Numerics;
 using System;
 
 
@@ -18,6 +17,8 @@ public class transmitting_script : MonoBehaviour
     private GameObject playerObj = null;
     public static double angle_from_beacon;
     public static float arc_length;
+    public static Vector3 beaconPos;
+    public static bool outsideRange = false;
 
     // Start is called before the first frame update
     public 
@@ -26,8 +27,12 @@ public class transmitting_script : MonoBehaviour
         coords = new List<Vector3>();
         vectors = new List<Vector3>();
         arcs = new List<float>();
+
+        Vector3 origin = new Vector3(5, 0, 0);
+        float rotation = 45;
+
         LoadData();
-        TransformData();
+        SetFluxPosition(origin, rotation);
         CreateArrows();
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
@@ -38,6 +43,11 @@ public class transmitting_script : MonoBehaviour
     void Update()
     {
         Transform t = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        CheckDistToSource();
+        if (outsideRange) {
+            return;
+        }
+
         int min_index = GetClosestVector(player_trans.position.x, player_trans.position.y, player_trans.position.z);
         Vector3 closest_vector = vectors[min_index];
         arc_length = arcs[min_index];
@@ -48,18 +58,22 @@ public class transmitting_script : MonoBehaviour
         if (vx > 0 & vz > 0) 
         {
             vector_degree = 90 - Math.Atan(vz / vx)*(180/Math.PI);
+            //Debug.Log("SAFE");
         }
         else if(vx > 0 & vz < 0)
         {
             vector_degree = 90 + (Math.Atan(Math.Abs(vz / vx))*(180/Math.PI));
+            //Debug.Log("DANGER");
         }
         else if(vx < 0 & vz < 0)
         {
             vector_degree = 180 + (90 - Math.Atan(vz / vx)*(180/Math.PI));
+            //Debug.Log("SAFE");
         }
         else 
         {
             vector_degree = 270 + (Math.Atan(Math.Abs(vz / vx))*(180/Math.PI));
+            //Debug.Log("SAFE");
         }
 
         Vector3 player_direction = player_trans.eulerAngles;
@@ -71,9 +85,6 @@ public class transmitting_script : MonoBehaviour
         else if (angle_from_beacon > 180) {
             angle_from_beacon = (360 - angle_from_beacon) * -1;
         }
-
-        // Debug.Log("Angle of signal direction from beacon: " + angle_from_beacon);
-        // Debug.Log("Distance to source: " + arc_length);
     }
 
     void LoadData()
@@ -124,7 +135,7 @@ public class transmitting_script : MonoBehaviour
             else{
                 color = new Color(1.0f, 0.0f, 0.0f);  
             }
-            Debug.DrawLine(new Vector3(start.x, 0.0f , start.z), new Vector3(coords[i].x + vectors[i].x, 0.0f, coords[i].z + vectors[i].z) , color, 1000.0f);
+            Debug.DrawLine(new Vector3(start.x, 24 , start.z), new Vector3(coords[i].x + vectors[i].x, 24, coords[i].z + vectors[i].z) , color, 1000.0f);
         }
     }
     
@@ -143,8 +154,25 @@ public class transmitting_script : MonoBehaviour
         return index;
     }
 
-    void TransformData() //
+    void SetFluxPosition(Vector3 translation, float rotation) 
     {
+        beaconPos = new Vector3(UnityEngine.Random.Range(-50, 50), 22, UnityEngine.Random.Range(-50, 50));
+        float randRot = UnityEngine.Random.Range(0, 360);
 
+        for (int i = 0; i < coords.Count; i++)
+        {
+            // Rotate
+            coords[i] = Quaternion.Euler(0, randRot, 0) * coords[i];
+            vectors[i] = Quaternion.Euler(0, randRot, 0) * vectors[i];
+
+            // Translate (only have to worry about coords, since vectors will be unaffected by translation)
+            coords[i] += beaconPos;
+        }     
+    }
+
+    void CheckDistToSource()
+    {
+        double dist = Math.Sqrt(Math.Pow(player_trans.position.x - beaconPos.x, 2) + Math.Pow(player_trans.position.z - beaconPos.z, 2));
+        outsideRange = dist > 55 ? true : false;
     }
 }
