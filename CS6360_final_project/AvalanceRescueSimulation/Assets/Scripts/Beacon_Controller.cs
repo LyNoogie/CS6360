@@ -9,7 +9,7 @@ public class Beacon_Controller : MonoBehaviour
     public float beaconMag;
     public Quaternion beaconAngle;
     public GameObject player;
-    public float bOffset;
+    private float bOffset = 1.0f;
 
     GameObject b1;
     GameObject b2;
@@ -48,6 +48,8 @@ public class Beacon_Controller : MonoBehaviour
         float arc_length = transmitting_script.arc_length;
         bool outsideRange = transmitting_script.outsideRange;
 
+
+        Debug.Log("forward: " + player.transform.forward * bOffset);
         this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bOffset;
         this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
         //this.transform.Rotate(0f, 180f, 0f);
@@ -60,6 +62,7 @@ public class Beacon_Controller : MonoBehaviour
         b4.GetComponent<Renderer>().material = unlitMat;
         b5.GetComponent<Renderer>().material = unlitMat;
 
+        text.GetComponent<UnityEngine.UI.Text>().text = outsideRange ? "" : arc_length.ToString("F1") ;
         if (outsideRange) {
             return;
         }
@@ -84,9 +87,6 @@ public class Beacon_Controller : MonoBehaviour
         {
             b5.GetComponent<Renderer>().material = litMat;
         }
-
-        text.GetComponent<UnityEngine.UI.Text>().text = outsideRange ? "" : arc_length.ToString("F1") ;
-        Debug.Log("Outside Range: " + outsideRange);
 
         //switch (yAngle)
         //{
