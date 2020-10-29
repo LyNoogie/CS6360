@@ -11,10 +11,6 @@ public class Beacon_Controller : MonoBehaviour
     public GameObject player;
     public float bForward;
 
-    //public void Toggle(bool b)
-    //{
-    //    this.SetActive(b);
-    //}
 
     
     GameObject b1;
