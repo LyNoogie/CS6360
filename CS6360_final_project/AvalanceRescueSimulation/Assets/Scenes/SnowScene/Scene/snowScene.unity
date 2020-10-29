@@ -2112,6 +2112,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 387298198}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &399342842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1682218170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &399342843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399342842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9650174783fdb84ea195e7c9653a264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisibilityParam: 0
+  LevelType: 0
+  CurrentTool: 0
+  ShowFlux: 0
 --- !u!1 &402049589 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1694894201118028, guid: 6dcae7204dd466c4c862bc640ea7c02e,
@@ -4534,7 +4556,7 @@ GameObject:
   - component: {fileID: 912079241}
   - component: {fileID: 912079240}
   m_Layer: 0
-  m_Name: Beacon Container
+  m_Name: BeaconContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,8 +10,13 @@ public class Beacon_Controller : MonoBehaviour
     public Quaternion beaconAngle;
     public GameObject player;
     public float bForward;
-    
 
+    //public void Toggle(bool b)
+    //{
+    //    this.SetActive(b);
+    //}
+
+    
     GameObject b1;
     GameObject b2;
     GameObject b3;
@@ -124,6 +129,8 @@ public class Beacon_Controller : MonoBehaviour
 
 
     }
+
+
    
     
     
