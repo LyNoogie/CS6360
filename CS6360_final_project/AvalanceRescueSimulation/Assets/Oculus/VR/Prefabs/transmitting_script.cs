@@ -40,15 +40,16 @@ public class transmitting_script : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        OVRInput.Update();
+        //OVRInput.Update();
     }
 
     // Update is called once per frame
     void Update()
     {
         //int min_index;
-        OVRInput.Update();
-        if (Input.GetJoystickNames()[1] == "")
+        //OVRInput.Update();
+        //if (Input.GetJoystickNames()[1] == "")
+        if (Input.GetJoystickNames().Length > 1)
         {
             used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         }
@@ -56,7 +57,7 @@ public class transmitting_script : MonoBehaviour
         {
             //used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
 
-            used_transform = GameObject.FindWithTag("RightHandAnchor").GetComponent<Transform>();
+            used_transform = GameObject.Find("RightHandAnchor").GetComponent<Transform>();
             //used_transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
             //used_transform.position= OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         }
