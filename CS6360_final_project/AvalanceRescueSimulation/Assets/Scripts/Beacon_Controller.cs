@@ -52,6 +52,7 @@ public class Beacon_Controller : MonoBehaviour
         bool outsideRange = transmitting_script.outsideRange;
 
         if (Input.GetJoystickNames().Length<2)
+
         {
             Debug.Log("forward: " + player.transform.forward * bForward);
             this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bForward;

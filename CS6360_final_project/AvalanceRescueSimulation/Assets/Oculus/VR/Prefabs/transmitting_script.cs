@@ -40,15 +40,17 @@ public class transmitting_script : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        OVRInput.Update();
+        //OVRInput.Update();
     }
 
     // Update is called once per frame
     void Update()
     {
         //int min_index;
+
         OVRInput.Update();
         if (Input.GetJoystickNames().Length < 2)
+
         {
             used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         }
