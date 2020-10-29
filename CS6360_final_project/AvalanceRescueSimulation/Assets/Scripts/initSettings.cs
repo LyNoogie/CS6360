@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class initSettings : MonoBehaviour
 {
     public static int snow_amount = 0;
-    public static bool hints = false;
     public static int snow_type = 0;
     public static int level = 0;
 
@@ -25,16 +24,22 @@ public class initSettings : MonoBehaviour
 
         if (scene_name != "StartMemu")
             Debug.Log("list init parameters: snow amount:" + snow_amount);
+        else
+        {
+            //difficulty = GameObject.Find("Scene_select_dropdown").GetComponent<Dropdown>();
+            difficulty.onValueChanged.AddListener(delegate
+            {
+                Dropdown1ValueChanged(difficulty);
+            });
 
-        //difficulty = GameObject.Find("Scene_select_dropdown").GetComponent<Dropdown>();
-        difficulty.onValueChanged.AddListener(delegate {
-            Dropdown1ValueChanged(difficulty);
-        });
-
-        //snowPackType = GameObject.Find("Snow_pack_dropdown").GetComponent<Dropdown>();
-        snowPackType.onValueChanged.AddListener(delegate {
-            Dropdown2ValueChanged(snowPackType);
-        });
+            //snowPackType = GameObject.Find("Snow_pack_dropdown").GetComponent<Dropdown>();
+            snowPackType.onValueChanged.AddListener(delegate
+            {
+                Dropdown2ValueChanged(snowPackType);
+            });
+        }
+        if (scene_name != "StartMemu")
+            Debug.Log(scene_name + " snow_amount:" + snow_amount.ToString() + " snow_type: " + snow_type.ToString());
     }
 
 
@@ -44,17 +49,13 @@ public class initSettings : MonoBehaviour
         if (scene_name == "StartMemu")
         {
             snow_amount = (int)snowSlider.value;
-            
         }
-
     }
 
 
 
     public void LoadScene(string scene_name)
     {
-
-        //set up player object
 
 
         //todo:: add in scenes for difficulty
@@ -72,4 +73,7 @@ public class initSettings : MonoBehaviour
         snow_type = change.value;
         Debug.Log("level is " + snow_type.ToString());
     }
+
+    public int getSnowAmount() { return snow_amount; }
+    public int getSnowPackType() { return snow_type; }
 }
