@@ -1,6 +1,6 @@
 ﻿    Shader "Custom/SnowDispShader" {
         Properties {
-            _Tess ("Tessellation", Range(1,32)) = 26
+            _Tess ("Tessellation", Range(1,32)) = 32
             _MainTex ("Base (RGB)", 2D) = "white" {}
             _DispTex ("Disp Texture", 2D) = "gray" {}
             _TerrainDispTex ("Terrain Disp Texture", 2D) = "gray" {}
@@ -51,7 +51,7 @@
             	float blur_texture_range = 0.001;
             	for (int i=-radius; i<=radius; i++){
             		for (int j=-radius; j<=radius; j++){	
-            			mean_height += (tex2Dlod(_DispTex, float4((1-v.texcoord.x)+i*blur_texture_range, (1-v.texcoord.y)+j*blur_texture_range, 0,0)).r)* _Displacement; 
+            			mean_height += (tex2Dlod(_DispTex, float4((v.texcoord.x)+i*blur_texture_range, (v.texcoord.y)+j*blur_texture_range, 0,0)).r)* _Displacement; 
             			counter+=1;
             		}	
             	}
@@ -69,12 +69,12 @@
             void surf (Input IN, inout SurfaceOutput o) {
                 half4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
                 float h = IN.color.x; 
-                o.Albedo = c.rgb * (1-h*0.8);
+                o.Albedo = c.rgb * (1-h*0.2);
                 o.Specular = 0.2;
                 o.Gloss = 1.0;
                 o.Normal = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex));
             }
             ENDCG
-        }
+        } 
         FallBack "Diffuse"
     }
