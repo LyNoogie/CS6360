@@ -48,7 +48,7 @@ public class transmitting_script : MonoBehaviour
     {
         //int min_index;
         OVRInput.Update();
-        if (Input.GetJoystickNames()[1] == "")
+        if (Input.GetJoystickNames().Length < 2)
         {
             used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         }
@@ -56,7 +56,7 @@ public class transmitting_script : MonoBehaviour
         {
             //used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
 
-            used_transform = GameObject.FindWithTag("RightHandAnchor").GetComponent<Transform>();
+            used_transform = GameObject.Find("RightHandAnchor").GetComponent<Transform>();
             //used_transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
             //used_transform.position= OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         }
@@ -192,7 +192,8 @@ public class transmitting_script : MonoBehaviour
     void CheckDistToSource(Transform t)
     {
         double dist;
-        if (Input.GetJoystickNames()[1] == "") { 
+        if (Input.GetJoystickNames().Length < 2)
+        {
             dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
         }
         else

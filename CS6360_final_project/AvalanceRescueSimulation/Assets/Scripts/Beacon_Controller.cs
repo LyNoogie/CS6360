@@ -51,7 +51,7 @@ public class Beacon_Controller : MonoBehaviour
         float arc_length = transmitting_script.arc_length;
         bool outsideRange = transmitting_script.outsideRange;
 
-        if (Input.GetJoystickNames()[1] == "")
+        if (Input.GetJoystickNames().Length<2)
         {
             Debug.Log("forward: " + player.transform.forward * bForward);
             this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * bForward;
@@ -62,7 +62,7 @@ public class Beacon_Controller : MonoBehaviour
         }
         else
         {
-            Transform t= GameObject.FindWithTag("RightHandAnchor").GetComponent<Transform>();
+            Transform t= GameObject.Find("RightHandAnchor").GetComponent<Transform>();
 
 
             //this.transform.position = t.position;
