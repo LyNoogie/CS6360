@@ -35,7 +35,6 @@ public class Timer : MonoBehaviour
         {
             elapsedPausedTime = Time.time - pauseStartTime;
         }
-        Debug.Log(display);
 
         timerText.GetComponent<UnityEngine.UI.Text>().text = display ? elapsedRunningTime.ToString("F1") : "";
     }
