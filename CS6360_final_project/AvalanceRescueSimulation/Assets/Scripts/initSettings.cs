@@ -8,7 +8,7 @@ public class initSettings : MonoBehaviour
 {
     public static int snow_amount = 0;
     public static bool hints = false;
-    public static float snow_type = 0;
+    public static int snow_type = 0;
     public static int level = 0;
 
     public Slider snowSlider;
