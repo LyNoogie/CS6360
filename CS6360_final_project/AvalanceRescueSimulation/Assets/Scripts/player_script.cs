@@ -34,6 +34,7 @@ public class player_script : MonoBehaviour
     public bool ShowFlux;
 
     public GameObject settings_obj;
+    public GameObject SnowParticleSystem;
     private bool load_initSetting;
 
 
@@ -51,15 +52,36 @@ public class player_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // set up player object
+        // This should happen only once, but it's put in update() 
+        // bc I'm not sure when player_script object is in Start() 
+        // whether initSetting's varibles are ready 
+
         if (!load_initSetting)
         {
-            // if enter a new scene, set up player object
-            // This should happen only once, but it's put in
-            // update() bc I'm not sure when player_script
-            // object Start() whether initSetting is alive
-            VisibilityParam = settings_obj.GetComponent<initSettings>().getSnowAmount();
-            Speed = (PLAYER_SPEED) settings_obj.GetComponent<initSettings>().getSnowPackType();
+            // load a default setting if start from this scene directly
+            if (!settings_obj.GetComponent<initSettings>().setInStartMenu())
+            {
+                VisibilityParam = 10;
+                Speed = PLAYER_SPEED.FAST;
 
+
+                Debug.Log("SKIP INIT SETTINGS: VisibilityParam= " + VisibilityParam.ToString() + " user speed= " + Speed.ToString());
+            }
+            else
+            {
+                // enter a new scene, load varibles from init setting object
+                VisibilityParam = settings_obj.GetComponent<initSettings>().getSnowAmount();
+                Speed = (PLAYER_SPEED)settings_obj.GetComponent<initSettings>().getSnowPackType();
+
+                Debug.Log("LOAD INIT SETTINGS: VisibilityParam= " + VisibilityParam.ToString() + " user speed= " + Speed.ToString());
+            }
+
+            // set particle systems accordingly
+            ParticleSystem.MainModule m  = SnowParticleSystem.GetComponent<ParticleSystem>().main;
+            m.maxParticles = (int)(VisibilityParam  * 800);
+
+            // set bool so that it's executed once
             load_initSetting = true;
         }
     }

@@ -10,6 +10,8 @@ public class initSettings : MonoBehaviour
     public static int snow_type = 0;
     public static int level = 0;
 
+    private static bool set_in_start_menu;
+
     public Slider snowSlider;
     public Dropdown snowPackType;
     public Dropdown difficulty;
@@ -22,8 +24,10 @@ public class initSettings : MonoBehaviour
     {
         scene_name = SceneManager.GetActiveScene().name;
 
-        if (scene_name != "StartMemu")
+        if (scene_name != "StartMenu")
+        {
             Debug.Log("list init parameters: snow amount:" + snow_amount);
+        }
         else
         {
             //difficulty = GameObject.Find("Scene_select_dropdown").GetComponent<Dropdown>();
@@ -37,16 +41,17 @@ public class initSettings : MonoBehaviour
             {
                 Dropdown2ValueChanged(snowPackType);
             });
+            set_in_start_menu = true;
         }
-        if (scene_name != "StartMemu")
-            Debug.Log(scene_name + " snow_amount:" + snow_amount.ToString() + " snow_type: " + snow_type.ToString());
+        //if (scene_name != "StartMemu")
+        //    Debug.Log(scene_name + " snow_amount:" + snow_amount.ToString() + " snow_type: " + snow_type.ToString());
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (scene_name == "StartMemu")
+        if (scene_name == "StartMenu")
         {
             snow_amount = (int)snowSlider.value;
         }
@@ -76,4 +81,5 @@ public class initSettings : MonoBehaviour
 
     public int getSnowAmount() { return snow_amount; }
     public int getSnowPackType() { return snow_type; }
+    public bool setInStartMenu() { return set_in_start_menu; }
 }
