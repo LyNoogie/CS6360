@@ -30,11 +30,10 @@ public class Probe_Controller : MonoBehaviour
             CheckDistToSource(probePos);
             if(withinRange)
             {
+                // Add jitter effect here
                 Debug.Log("GOT IT");
             }
         }
-        
-        
     }
 
     void CheckDistToSource(Vector3 probe)
