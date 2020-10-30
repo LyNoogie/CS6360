@@ -42,7 +42,7 @@ public class player_script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        VisibilityParam = 0;
+        VisibilityParam = 10;
         LevelType = LEVEL.EASY;
         CurrentTool = SAFTEY_TOOL.NONE;
         ShowFlux = false;

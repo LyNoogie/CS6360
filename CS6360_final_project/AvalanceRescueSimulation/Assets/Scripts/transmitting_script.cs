@@ -192,16 +192,7 @@ public class transmitting_script : MonoBehaviour
 
     void CheckDistToSource(Transform t)
     {
-        double dist;
-        if (Input.GetJoystickNames().Length < 2)
-        {
-            dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
-        }
-        else
-        {
-            dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
-
-        }
+        double dist = Math.Sqrt(Math.Pow(t.position.x - beaconPos.x, 2) + Math.Pow(t.position.z - beaconPos.z, 2));
         outsideRange = dist > 55 ? true : false;
     }
 }
