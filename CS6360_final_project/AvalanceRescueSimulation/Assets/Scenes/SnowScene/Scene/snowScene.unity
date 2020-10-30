@@ -13690,6 +13690,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1125068011842588, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -16033,7 +16037,6 @@ GameObject:
   - component: {fileID: 2052532090}
   - component: {fileID: 2052532089}
   - component: {fileID: 2052532088}
-  - component: {fileID: 2052532087}
   m_Layer: 8
   m_Name: snow_track_shape
   m_TagString: Untagged
@@ -16055,18 +16058,6 @@ Transform:
   m_Father: {fileID: 1726762077}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2052532087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052532085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9b470b318ae4645b4e16f43ce4dbe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2052532088
 BoxCollider:
   m_ObjectHideFlags: 0
