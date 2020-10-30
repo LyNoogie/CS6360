@@ -10483,7 +10483,7 @@ Canvas:
   m_GameObject: {fileID: 1134802143}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -13216,8 +13216,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 871600bbe5c92eb45a948fe73ff8b1a3, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 19f9654582a018e408a1b01f8ab2e1a9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
