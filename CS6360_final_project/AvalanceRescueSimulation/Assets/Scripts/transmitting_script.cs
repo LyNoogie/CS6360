@@ -11,10 +11,10 @@ public class transmitting_script : MonoBehaviour
     private List<Vector3> coords;
     private List<Vector3> vectors;
     private List<float> arcs;
+    private List<GameObject> fluxLines;
     Transform player_trans;
     Transform controller_trans;
     Transform used_transform;
-
 
     private OVRPlayerController player;
     private GameObject playerObj = null;
@@ -22,6 +22,7 @@ public class transmitting_script : MonoBehaviour
     public static float arc_length;
     public static Vector3 beaconPos;
     public static bool outsideRange = false;
+    public static bool showFlux = false;
 
     // Start is called before the first frame update
     public 
@@ -30,13 +31,14 @@ public class transmitting_script : MonoBehaviour
         coords = new List<Vector3>();
         vectors = new List<Vector3>();
         arcs = new List<float>();
+        fluxLines = new List<GameObject>();
 
         Vector3 origin = new Vector3(5, 0, 0);
         float rotation = 45;
 
         LoadData();
+        CreateLineGameObjs();
         SetFluxPosition(origin, rotation);
-        CreateArrows();
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
@@ -46,7 +48,17 @@ public class transmitting_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //int min_index;
+        if (Input.GetKeyDown("f"))
+        {
+            if (!showFlux) {
+                DrawFluxLines();
+            }
+            else {
+                RemoveFluxLines();
+            }
+            showFlux = !showFlux;
+        }
+
 
         OVRInput.Update();
         if (Input.GetJoystickNames().Length < 2)
@@ -55,16 +67,14 @@ public class transmitting_script : MonoBehaviour
         }
         else
         {
-            //used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
             used_transform = GameObject.Find("RightHandAnchor").GetComponent<Transform>();
-            //used_transform.rotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
-            //used_transform.position= OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         }
+
         CheckDistToSource(used_transform);
         if (outsideRange) {
             return;
         }
+
         int min_index= GetClosestVector(used_transform.position.x, used_transform.position.y, used_transform.position.z);
 
         Vector3 closest_vector = vectors[min_index];
@@ -141,22 +151,53 @@ public class transmitting_script : MonoBehaviour
         }
     }
 
-    void CreateArrows()
+    // Draw all flux lines
+    void DrawFluxLines()
     {
-        for (int i = 0; i < coords.Count; i++)
-        {
-            Color color;
-            var start = coords[i];   
-            if (start.x > 0) {
-                color = new Color(0.0f, 0.0f, 1.0f);     
-            }
-            else{
-                color = new Color(1.0f, 0.0f, 0.0f);  
-            }
-            Debug.DrawLine(new Vector3(start.x, 24 , start.z), new Vector3(coords[i].x + vectors[i].x, 24, coords[i].z + vectors[i].z) , color, 1000.0f);
+        Color color1 = new Color(1.0f, 0.0f, 0.0f);
+        Color color2 = new Color(0.0f, 0.0f, 1.0f);
+        for (int i = 0; i < fluxLines.Count; i++) {
+            Vector3 start = coords[i];   
+            GameObject line = fluxLines[i];
+            //Debug.DrawLine(new Vector3(start.x, 24 , start.z), new Vector3(coords[i].x + vectors[i].x, 24, coords[i].z + vectors[i].z) , color1, 1000.0f);
+            DrawLine(line, new Vector3(start.x, 22.5f, start.z), new Vector3(start.x + vectors[i].x, 22.5f, start.z + vectors[i].z), color1, color2, 1000.0f);
         }
     }
-    
+
+    // Remove all flux lines
+    void RemoveFluxLines() {
+        for (int i = 0; i < fluxLines.Count; i++) {
+            GameObject line = fluxLines[i];
+            LineRenderer lr = line.GetComponent<LineRenderer>();
+            lr.positionCount = 0;
+        }
+    }
+
+    // Initialize flux line objs
+    void CreateLineGameObjs(){
+        for (int i = 0; i < coords.Count; i++)
+        {
+            GameObject myLine = new GameObject();
+            myLine.AddComponent<LineRenderer>();
+            fluxLines.Add(myLine);
+        }
+    } 
+
+    // Draw a single flux line
+    void DrawLine(GameObject line, Vector3 start, Vector3 end, Color color1, Color color2, float duration = 0.2f)
+        {
+           line.transform.position = start;
+           LineRenderer lr = line.GetComponent<LineRenderer>();
+           //lr.SetVertexCount(2);
+           lr.positionCount = 2;
+           lr.startColor = color1;
+           lr.endColor = color2;
+           lr.startWidth = 0.05f;
+           lr.endWidth = 0.05f;
+           lr.SetPosition(0, start);
+           lr.SetPosition(1, end);
+        }
+
     int GetClosestVector(float x, float y, float z) //player coords
     {
         double min_dist = 100000000;
