@@ -154,9 +154,10 @@ public class transmitting_script : MonoBehaviour
     // Draw all flux lines
     void DrawFluxLines()
     {
-        Color color1 = new Color(1.0f, 0.0f, 0.0f);
-        Color color2 = new Color(0.0f, 0.0f, 1.0f);
+        float strength = 100;
         for (int i = 0; i < fluxLines.Count; i++) {
+            Color color1 = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+            Color color2 = new Color(0.0f, 0.0f, 1.0f, (strength - arcs[i]) / strength);
             Vector3 start = coords[i];   
             GameObject line = fluxLines[i];
             //Debug.DrawLine(new Vector3(start.x, 24 , start.z), new Vector3(coords[i].x + vectors[i].x, 24, coords[i].z + vectors[i].z) , color1, 1000.0f);
@@ -186,16 +187,16 @@ public class transmitting_script : MonoBehaviour
     // Draw a single flux line
     void DrawLine(GameObject line, Vector3 start, Vector3 end, Color color1, Color color2, float duration = 0.2f)
         {
-           line.transform.position = start;
-           LineRenderer lr = line.GetComponent<LineRenderer>();
-           //lr.SetVertexCount(2);
-           lr.positionCount = 2;
-           lr.startColor = color1;
-           lr.endColor = color2;
-           lr.startWidth = 0.05f;
-           lr.endWidth = 0.05f;
-           lr.SetPosition(0, start);
-           lr.SetPosition(1, end);
+            line.transform.position = start;
+             LineRenderer lr = line.GetComponent<LineRenderer>();
+            lr.positionCount = 2;
+            lr.material = new Material(Shader.Find("Sprites/Default"));
+            lr.startColor = color1;
+            lr.endColor = color2;
+            lr.startWidth = 0.05f;
+            lr.endWidth = 0.05f;
+            lr.SetPosition(0, start);
+            lr.SetPosition(1, end);
         }
 
     int GetClosestVector(float x, float y, float z) //player coords
