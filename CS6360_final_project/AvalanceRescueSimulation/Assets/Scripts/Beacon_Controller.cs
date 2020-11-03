@@ -10,7 +10,7 @@ public class Beacon_Controller : MonoBehaviour
     public Quaternion beaconAngle;
     public GameObject player;
     public float bForward;
-
+    //public bool bEquip;
 
     
     GameObject b1;
@@ -35,6 +35,8 @@ public class Beacon_Controller : MonoBehaviour
         litMat = Resources.Load("Lit", typeof(Material)) as Material;
         unlitMat = Resources.Load("Unlit", typeof(Material)) as Material;
 
+        //bEquip = true;
+
         text = GameObject.Find("BeaconText");
         b1 = GameObject.Find("B1");
         b2 = GameObject.Find("B2");
@@ -51,6 +53,10 @@ public class Beacon_Controller : MonoBehaviour
         double signal_angle = transmitting_script.angle_from_beacon;
         float arc_length = transmitting_script.arc_length;
         bool outsideRange = transmitting_script.outsideRange;
+
+
+
+        //this.GetComponent<Renderer>().enabled = bEquip;
 
         if (Input.GetJoystickNames().Length<2)
 
@@ -107,21 +113,8 @@ public class Beacon_Controller : MonoBehaviour
             b5.GetComponent<Renderer>().material = litMat;
         }
 
-        //switch (yAngle)
-        //{
-        //    case var _ when yAngle <= -60f:
-        //        tb = b1;
-        //    case float angle when angle <= -30f && angle > -60f:
-        //        tb = b2;
-        //    case float angle when angle > -30f && angle < 30f:
-        //        tb = b3;
-        //    case float angle when angle > 30f && angle < 60f:
-        //        tb = b4;
-        //    case float angle when angle > 60f:
-        //        tb = b5;
-        //}
-        //tb.GetComponent<Renderer>().material = litMat;
 
+        
 
     }
 

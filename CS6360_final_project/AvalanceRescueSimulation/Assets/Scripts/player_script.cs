@@ -60,8 +60,12 @@ public class player_script : MonoBehaviour
         BeaconObj = GameObject.Find("BeaconContainer");
 
         //TODO:: uncomment when probe and shovel inported
-        //ProbeObj = GameObject.Find("ProbeContainer");
-        //ShovelObj = GameObject.Find("ShovelContainer");
+        ProbeObj = GameObject.Find("ProbeContainer");
+        ShovelObj = GameObject.Find("ShovelContainer");
+
+        BeaconObj.SetActive(false);
+        ProbeObj.SetActive(false);
+        ShovelObj.SetActive(false);
     }
 
     // Update is called once per frame
@@ -103,7 +107,10 @@ public class player_script : MonoBehaviour
 
         if (Input.GetJoystickNames().Length < 2)
         {
-
+            if (Input.GetKeyDown("c"))
+            {
+                toggle_tool = true;
+            }
         }
         else
         {
@@ -117,7 +124,7 @@ public class player_script : MonoBehaviour
             {
                 case SAFTEY_TOOL.NONE:
                     CurrentTool = SAFTEY_TOOL.BEACON;
-                    //ShovelObj.SetActive(false);
+                    ShovelObj.SetActive(false);
                     break;
                 case SAFTEY_TOOL.BEACON:
                     CurrentTool = SAFTEY_TOOL.PROBE;
@@ -126,12 +133,12 @@ public class player_script : MonoBehaviour
                 case SAFTEY_TOOL.PROBE:
                     CurrentTool = SAFTEY_TOOL.SHOVEL;
                     BeaconObj.SetActive(false);
-                    //ProbeObj.SetActive(true);
+                    ProbeObj.SetActive(true);
                     break;
                 case SAFTEY_TOOL.SHOVEL:
                     CurrentTool = SAFTEY_TOOL.NONE;
-                    //ProbeObj.SetActive(false);
-                    //ShovelObj.SetActive(true);
+                    ProbeObj.SetActive(false);
+                    ShovelObj.SetActive(true);
                     break;
 
 
