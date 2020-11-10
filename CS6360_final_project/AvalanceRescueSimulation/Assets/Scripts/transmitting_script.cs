@@ -216,9 +216,11 @@ public class transmitting_script : MonoBehaviour
 
     void SetFluxPosition(Vector3 translation, float rotation) 
     {
-        beaconPos = new Vector3(UnityEngine.Random.Range(30, 115), 22, UnityEngine.Random.Range(-40, 60));
+        //beaconPos = new Vector3(UnityEngine.Random.Range(30, 115), 22, UnityEngine.Random.Range(-40, 60));
+        beaconPos = new Vector3(70.0f, 22.0f, 0.0f);
         //beaconPos = new Vector3(0, 22, 0);
-        float randRot = UnityEngine.Random.Range(0, 360);
+        //float randRot = UnityEngine.Random.Range(0, 360);
+        float randRot = 270;
         //float randRot = 0;
 
         for (int i = 0; i < coords.Count; i++)
