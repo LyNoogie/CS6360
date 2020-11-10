@@ -39,7 +39,20 @@ public class Probe_Controller : MonoBehaviour
         //this.GetComponent<Renderer>().enabled = pEquip;
         burriedPos = transmitting_script.beaconPos;
 
-        if (Input.GetKeyDown("z"))
+        bool is_triggered = false;
+        if (Input.GetJoystickNames().Length < 2)
+        {
+            if (Input.GetKeyDown("z"))
+            {
+                is_triggered = true;
+                
+            } 
+        }
+        else
+        {
+            is_triggered = OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger);
+        }
+        if (is_triggered)
         {
             pEquip = true;
             CheckDistToSource(probePos);
@@ -49,7 +62,7 @@ public class Probe_Controller : MonoBehaviour
                 Debug.Log("GOT IT");
                 fi.StartFlash(0.2f, 1);
             }
-        } 
+        }
 
 
     }

@@ -104,18 +104,16 @@ public class player_script : MonoBehaviour
             load_initSetting = true;
         }
         bool toggle_tool = false;
+        if (Input.GetKeyDown("c"))
+        {
+            toggle_tool = true;
+            Debug.Log("toggle pressed");
+        }
+        //if (Input.GetJoystickNames().Length >= 2)
+        //{
+        //    toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
 
-        if (Input.GetJoystickNames().Length < 2)
-        {
-            if (Input.GetKeyDown("c"))
-            {
-                toggle_tool = true;
-            }
-        }
-        else
-        {
-            toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
-        }
+        //}
         if (toggle_tool)
         {
             Debug.Log("TOggled");
