@@ -47,7 +47,7 @@ public class LowerTerrain : MonoBehaviour
     {
         if (TestWithMouse == true) 
         {
-            if (Input.GetMouseButtonDown (0)) 
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) 
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
