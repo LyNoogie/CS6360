@@ -100,7 +100,11 @@ public class player_script : MonoBehaviour
             // set particle systems accordingly
             ParticleSystem.MainModule m  = SnowParticleSystem.GetComponent<ParticleSystem>().main;
             m.maxParticles = (int)(VisibilityParam  * 800);
+            m.startSpeed = 5;
+            //m.startSize
+            //m.startColor
 
+            // set user speed
             OVRPlayerController playerController = gameObject.GetComponent<OVRPlayerController>();
 
             if (Speed == PLAYER_SPEED.FAST) playerController.SetMoveScaleMultiplier(1.0f);
@@ -108,7 +112,6 @@ public class player_script : MonoBehaviour
             else if (Speed == PLAYER_SPEED.SLOW) playerController.SetMoveScaleMultiplier(0.5f);
             else playerController.SetMoveScaleMultiplier(1.0f); // fall to default FAST
 
-            playerController.SetMoveScaleMultiplier(3.0f);
             // set bool so that it's executed once
             load_initSetting = true;
         }
