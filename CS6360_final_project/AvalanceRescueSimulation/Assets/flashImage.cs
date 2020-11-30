@@ -28,6 +28,14 @@ public class flashImage : MonoBehaviour
         imageColor.a = currentAlpha;
         img.color = imageColor;
 
+        RectTransform objectRectTransform = gameObject.GetComponent<RectTransform>();
+        Debug.Log("width: " + objectRectTransform.rect.width + ", height: " + objectRectTransform.rect.height);
+
+        // scale up a bit for jittering
+        img.transform.localScale = new Vector2( objectRectTransform.rect.width / img.GetComponent<RectTransform>().rect.width *1.2f, 
+                                                objectRectTransform.rect.height / img.GetComponent<RectTransform>().rect.height * 1.2f);
+   
+
         originalImagePos = img.transform.position;
     }
 
