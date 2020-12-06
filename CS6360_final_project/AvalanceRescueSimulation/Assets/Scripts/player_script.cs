@@ -38,7 +38,7 @@ public class player_script : MonoBehaviour
     public GameObject SnowParticleSystem;
     private bool load_initSetting;
 
-
+    public GameObject inGameMenu;
 
     private GameObject BeaconObj;
     private GameObject ProbeObj;
@@ -115,6 +115,18 @@ public class player_script : MonoBehaviour
             // set bool so that it's executed once
             load_initSetting = true;
         }
+
+        // set 
+        if (Input.GetKeyDown("h"))
+        {
+            inGameMenu.GetComponent<Canvas>().enabled = !inGameMenu.GetComponent<Canvas>().enabled;
+        }
+
+        if (Input.GetKeyDown("b"))
+        {
+            GameObject.Find("FoundTargetCanvas").GetComponent<Canvas>().enabled = true;
+        }
+
         bool toggle_tool = false;
         if (Input.GetKeyDown("c"))
         {
