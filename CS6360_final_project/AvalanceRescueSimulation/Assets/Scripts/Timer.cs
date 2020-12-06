@@ -11,14 +11,14 @@ public class Timer : MonoBehaviour
     private float totalElapsedPausedTime = 0f;
     private bool running = false;
     private bool paused = false;
-    private bool display = false;
+    private bool display = true;
 
     private GameObject timerText;
 
     void Start() 
     {
         timerText = GameObject.Find("Timer-Text");
-        Begin();
+        Begin();  // Assumes that the Help Menu is shown at game start
     }
     
     void Update()
@@ -27,11 +27,23 @@ public class Timer : MonoBehaviour
         {
             display = !display;
         }
+        if (Input.GetKeyDown("h"))
+        {
+            paused = !paused;
+            if (paused)
+            {
+                Pause();
+            }
+            else
+            {
+                Unpause();
+            }
+        }
         if (running)
         {
             elapsedRunningTime = Time.time - runningStartTime - totalElapsedPausedTime;
         }
-        else if (paused)
+        if (paused)
         {
             elapsedPausedTime = Time.time - pauseStartTime;
         }
@@ -44,28 +56,34 @@ public class Timer : MonoBehaviour
         if (!running && !paused)
         {
             runningStartTime = Time.time;
-            running = true;
+            elapsedRunningTime = 0.0f;
+            running = false;
+            paused = true;
         }
     }
   
     public void Pause()
     {
-        if (running && !paused)
-        {
-            running = false;
-            pauseStartTime = Time.time;
-            paused = true;
-        }
+        // if (running && !paused)
+        // {
+        //     running = false;
+        //     pauseStartTime = Time.time;
+        //     paused = true;
+        // }
+        pauseStartTime = Time.time;
+        running = false;
     }
   
     public void Unpause()
     {
-        if (!running && paused)
-        {
-            totalElapsedPausedTime += elapsedPausedTime;
-            running = true;
-            paused = false;
-        }
+        // if (!running && paused)
+        // {
+        //     totalElapsedPausedTime += elapsedPausedTime;
+        //     running = true;
+        //     paused = false;
+        // }
+        totalElapsedPausedTime += elapsedPausedTime;
+        running = true;
     }
   
     public void Reset()
