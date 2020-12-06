@@ -30,8 +30,6 @@ public class finalMenu : MonoBehaviour
             enterMenu = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-                SceneManager.LoadScene("StartMenu");
     }
 
 }
