@@ -125,6 +125,7 @@ public class player_script : MonoBehaviour
         if (Input.GetKeyDown("b"))
         {
             GameObject.Find("FoundTargetCanvas").GetComponent<Canvas>().enabled = true;
+            GameObject.Find("FoundTargetCanvas").GetComponent<finalMenu>().EnterMenu();
         }
 
         bool toggle_tool = false;
