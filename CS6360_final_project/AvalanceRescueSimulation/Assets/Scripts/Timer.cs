@@ -104,7 +104,7 @@ public class Timer : MonoBehaviour
   
     public int GetSeconds()
     {
-        return (int)(elapsedRunningTime);
+        return (int)(elapsedRunningTime % 60f);
     }
  
     public float GetRawElapsedTime()
