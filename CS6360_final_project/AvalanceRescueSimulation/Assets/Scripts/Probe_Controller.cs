@@ -14,6 +14,8 @@ public class Probe_Controller : MonoBehaviour
     public float pForward;
     public float pHeight = -0.3f;
     public bool pEquip;
+    public AudioClip thudAudio;
+    OVRPlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class Probe_Controller : MonoBehaviour
         fi = GameObject.Find("FlashCanvas").GetComponent<flashImage>();
         pEquip = false;
         pForward = 0.6f;
+        playerController = gameObject.GetComponent<OVRPlayerController>();
     }
 
     // Update is called once per frame
@@ -58,8 +61,8 @@ public class Probe_Controller : MonoBehaviour
             CheckDistToSource(probePos);
             if (withinRange)
             {
-                // Add jitter effect here
-                Debug.Log("GOT IT");
+                HapticsManager.singleton.TriggerVibration(thudAudio, playerController)
+                GetComponent<AudioSource>().PlayOneShot(thudAudio);
                 fi.StartFlash(0.2f, 1);
             }
         }
