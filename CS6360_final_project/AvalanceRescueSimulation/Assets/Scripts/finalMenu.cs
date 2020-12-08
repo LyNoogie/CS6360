@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class finalMenu : MonoBehaviour
 {
     private bool enableComponents = false;
-    private bool enterMenu = false;
     private Timer timer;
     private Text txt;
     private float rescueTime = 12345.0f;
@@ -20,15 +19,14 @@ public class finalMenu : MonoBehaviour
         gameObject.GetComponent<Canvas>().enabled = false;
     }
 
+    public void EnterMenu() {
+        rescueTime = timer.GetRawElapsedTime();
+        txt.text = "You have found the target!\n" + "Press  esc to exit to main menu.\n" + "Time taken: " + rescueTime.ToString("F1") + "sec";
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!enterMenu) {
-            rescueTime = timer.GetRawElapsedTime();
-            txt.text = "You have found the target!\n"+"Press  esc to exit to main menu.\n" + "Time taken: "+rescueTime.ToString("F1")+"sec";
-            enterMenu = true;
-        }
 
     }
 

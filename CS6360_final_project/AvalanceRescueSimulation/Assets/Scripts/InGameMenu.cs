@@ -29,11 +29,11 @@ public class InGameMenu : MonoBehaviour
         Vector2 titleTextSize = new Vector2(titleText.GetComponent<RectTransform>().rect.width, titleText.GetComponent<RectTransform>().rect.height);
         Vector2 contentTextSize = new Vector2(contentText.GetComponent<RectTransform>().rect.width, contentText.GetComponent<RectTransform>().rect.height);
 
-        titleText.transform.localScale = new Vector2(canvasSize.y * 0.0009f, canvasSize.y * 0.001f);
-        titleText.transform.position = new Vector3(titleText.transform.position.x, canvasSize.y *0.85f, titleText.transform.position.z);
+        //titleText.transform.localScale = new Vector2(canvasSize.y * 0.0009f, canvasSize.y * 0.001f);
+        //titleText.transform.position = new Vector3(titleText.transform.position.x, canvasSize.y, titleText.transform.position.z);
 
-        contentText.transform.localScale = new Vector2(canvasSize.y * 0.00075f, canvasSize.y * 0.00075f);
-        contentText.transform.position = new Vector3(contentText.transform.position.x, canvasSize.y * 0.45f, contentText.transform.position.z);
+        //contentText.transform.localScale = new Vector2(canvasSize.y * 0.00075f, canvasSize.y * 0.00075f);
+        //contentText.transform.position = new Vector3(contentText.transform.position.x, canvasSize.y * 0.45f, contentText.transform.position.z);
 
         escTime = 0f;
         startTime = 0f;
