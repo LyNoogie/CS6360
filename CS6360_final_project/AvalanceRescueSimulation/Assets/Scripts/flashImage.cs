@@ -35,12 +35,12 @@ public class flashImage : MonoBehaviour
                                                 objectRectTransform.rect.height / img.GetComponent<RectTransform>().rect.height * 1.2f);
    
 
-        originalImagePos = img.transform.position;
+        
     }
 
     public void StartFlash(float duration, float maxAlpha) {
         if (!img) Debug.Log("no imgae");
-
+        originalImagePos = img.transform.position;
         flashAlhpaDeltaEachStep = maxAlpha / (duration * 60);
         flashStepsOnMaxAlpha = (int)(maxAlpha / flashAlhpaDeltaEachStep);
         currentAlpha = 0.0f;
