@@ -12,12 +12,14 @@ public class HapticsManager : MonoBehaviour
             Destroy(this);
         else
             singleton = this;
+        Debug.Log("Got here");
         
     }
 
-    public void TriggerVibration(AudioClip vibrationAudio, OVRPlayerController controller)
+    public void TriggerVibration(AudioClip vibrationAudio, OVRInput.Controller controller)
     {
-        OVRHapticClip clip = new OVRHapticClip(vibrationAudio);
+        Debug.Log("Got here");
+        OVRHapticsClip clip = new OVRHapticsClip(vibrationAudio);
         OVRHaptics.RightChannel.Preempt(clip);
     }
 }

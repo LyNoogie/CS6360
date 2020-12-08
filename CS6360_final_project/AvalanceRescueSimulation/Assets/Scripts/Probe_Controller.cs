@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+// using HapticsManager;
 
 public class Probe_Controller : MonoBehaviour
 {
@@ -57,14 +58,17 @@ public class Probe_Controller : MonoBehaviour
         }
         if (is_triggered)
         {
+            
             pEquip = true;
             CheckDistToSource(probePos);
-            if (withinRange)
-            {
-                HapticsManager.singleton.TriggerVibration(thudAudio, playerController)
-                GetComponent<AudioSource>().PlayOneShot(thudAudio);
-                fi.StartFlash(0.2f, 1);
-            }
+            // if (withinRange)
+            // {
+            fi.StartFlash(0.2f, 1);
+            // HapticsManager hm = new HapticsManager();
+            HapticsManager.singleton.TriggerVibration(thudAudio, OVRInput.Controller.RTouch);
+            GetComponent<AudioSource>().PlayOneShot(thudAudio);
+            
+            // }
         }
 
 
