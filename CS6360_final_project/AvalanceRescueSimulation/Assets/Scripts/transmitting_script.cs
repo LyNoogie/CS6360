@@ -21,6 +21,7 @@ public class transmitting_script : MonoBehaviour
     public static double angle_from_beacon;
     public static float arc_length;
     public static Vector3 beaconPos;
+
     public static bool outsideRange = false;
     public static bool showFlux = false;
 

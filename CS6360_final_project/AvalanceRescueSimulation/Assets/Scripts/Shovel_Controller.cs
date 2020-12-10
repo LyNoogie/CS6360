@@ -5,7 +5,9 @@ using UnityEngine;
 public class Shovel_Controller : MonoBehaviour
 {
 
-    Vector3 shovelPos;
+    public static Vector3 shovelPos;
+    public static Vector3 shovelPosForRay;
+
     float sPosX;
     float sPosZ;
     //public GameObject player;
@@ -30,7 +32,7 @@ public class Shovel_Controller : MonoBehaviour
     void Update()
     {
         Transform player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
-        shovelPos = new Vector3(player.position.x, player.position.y + pHeight, player.position.z) + player.forward * pForward;
+        shovelPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * pForward;
         //this.transform.rotation = player.transform.rotation;
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
         this.transform.position = shovelPos;

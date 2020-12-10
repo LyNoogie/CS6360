@@ -15,6 +15,7 @@ public class LowerTerrain : MonoBehaviour
     protected int alphaMapHeight;
     protected int numOfAlphaLayers;
     private float[, ,] alphaMapBackup;
+    public GameObject shovelObject;
 
 
     void Start()
@@ -24,7 +25,7 @@ public class LowerTerrain : MonoBehaviour
         alphaMapWidth = myTerrain.terrainData.alphamapWidth;
         alphaMapHeight = myTerrain.terrainData.alphamapHeight;
         numOfAlphaLayers = myTerrain.terrainData.alphamapLayers;
-
+    
         if (Debug.isDebugBuild)
         {
             heights = myTerrain.terrainData.GetHeights (0, 0, xResolution, zResolution);    
@@ -45,10 +46,11 @@ public class LowerTerrain : MonoBehaviour
 
     void Update()
     {
-        if (TestWithMouse == true) 
+        //if (player_script.CurrentTool == SAFTEY_TOOL.SHOVEL);
+        if (Input.GetJoystickNames().Length < 2)
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) 
-            {
+            //if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) 
+            //{
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
                 if (Physics.Raycast (ray, out hit)) 
@@ -59,7 +61,24 @@ public class LowerTerrain : MonoBehaviour
                     // area middle point x and z, area size, texture ID from terrain textures
                     TextureDeformation (hit.point, 1 * 2f, 0);
                 }
+            //}
+        }
+        else
+        {
+            if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Shovel_Controller.shovelPos);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log("clicked");
+                    // area middle point x and z, area width, area height, smoothing distance, area height adjust
+                    raiselowerTerrainArea(hit.point, 1, 1, SmoothArea, 0.01f);
+                    // area middle point x and z, area size, texture ID from terrain textures
+                    TextureDeformation(hit.point, 1 * 2f, 0);
+                }
             }
+
         }
     }
 

@@ -134,11 +134,11 @@ public class player_script : MonoBehaviour
             toggle_tool = true;
             Debug.Log("toggle pressed");
         }
-        //if (Input.GetJoystickNames().Length >= 2)
-        //{
-        //    toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
+        if (Input.GetJoystickNames().Length >= 2)
+        {
+            toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
 
-        //}
+        }
         if (toggle_tool)
         {
             Debug.Log("TOggled");
