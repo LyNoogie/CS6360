@@ -17,6 +17,7 @@ public class Shovel_Controller : MonoBehaviour
     public float pHeight = -0.3f;
     public bool pEquip;
     public float sOffset = 0f;
+    public Transform blade;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,9 @@ public class Shovel_Controller : MonoBehaviour
     void Update()
     {
         Transform player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
+        blade = GameObject.Find("Shovel").GetComponent<Transform>();
+        shovelPosForRay = blade.transform.position;
+
         shovelPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * pForward;
         //this.transform.rotation = player.transform.rotation;
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
