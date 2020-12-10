@@ -65,7 +65,7 @@ public class LowerTerrain : MonoBehaviour
         }
         else
         {
-            if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)
+            if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > .7)
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Shovel_Controller.shovelPos);
@@ -73,7 +73,7 @@ public class LowerTerrain : MonoBehaviour
                 {
                     Debug.Log("clicked");
                     // area middle point x and z, area width, area height, smoothing distance, area height adjust
-                    raiselowerTerrainArea(hit.point, 1, 1, SmoothArea, 0.01f);
+                    raiselowerTerrainArea(Shovel_Controller.shovelPos, 1, 1, SmoothArea, 0.01f);
                     // area middle point x and z, area size, texture ID from terrain textures
                     TextureDeformation(hit.point, 1 * 2f, 0);
                 }

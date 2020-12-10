@@ -31,16 +31,14 @@ public class flashImage : MonoBehaviour
         RectTransform objectRectTransform = gameObject.GetComponent<RectTransform>();
 
         // scale up a bit for jittering
-        img.transform.localScale = new Vector2( objectRectTransform.rect.width / img.GetComponent<RectTransform>().rect.width *1.2f, 
-                                                objectRectTransform.rect.height / img.GetComponent<RectTransform>().rect.height * 1.2f);
+        img.transform.localScale = new Vector2( objectRectTransform.rect.width / img.GetComponent<RectTransform>().rect.width *1.0f, 
+                                                objectRectTransform.rect.height / img.GetComponent<RectTransform>().rect.height * 1.0f);
    
-
-        originalImagePos = img.transform.position;
     }
 
     public void StartFlash(float duration, float maxAlpha) {
         if (!img) Debug.Log("no imgae");
-
+        originalImagePos = gameObject.transform.position;
         flashAlhpaDeltaEachStep = maxAlpha / (duration * 60);
         flashStepsOnMaxAlpha = (int)(maxAlpha / flashAlhpaDeltaEachStep);
         currentAlpha = 0.0f;
@@ -80,7 +78,7 @@ public class flashImage : MonoBehaviour
     }
 
     void jitterImage(float radius) {
-        img.transform.position = originalImagePos + new Vector3(Random.Range(-radius, radius), 
+        img.transform.position = gameObject.transform.position + new Vector3(Random.Range(-radius, radius), 
                                                                 Random.Range(-radius, radius),
                                                                 0);
     }

@@ -48,7 +48,8 @@ public class Timer : MonoBehaviour
             elapsedPausedTime = Time.time - pauseStartTime;
         }
 
-        timerText.GetComponent<UnityEngine.UI.Text>().text = display ? elapsedRunningTime.ToString("F1") : "";
+        // timerText.GetComponent<UnityEngine.UI.Text>().text = display ? elapsedRunningTime.ToString("F1") : "";
+        timerText.GetComponent<UnityEngine.UI.Text>().text = display ? GetSeconds().ToString("F1") : "";
     }
   
     public void Begin()
@@ -99,12 +100,12 @@ public class Timer : MonoBehaviour
   
     public int GetMinutes()
     {
-        return (int)(elapsedRunningTime / 60f);
+        return (int)(Mathf.Floor(elapsedRunningTime / 60f));
     }
   
-    public int GetSeconds()
+    public float GetSeconds()
     {
-        return (int)(elapsedRunningTime % 60f);
+        return (elapsedRunningTime % 60f);
     }
  
     public float GetRawElapsedTime()
