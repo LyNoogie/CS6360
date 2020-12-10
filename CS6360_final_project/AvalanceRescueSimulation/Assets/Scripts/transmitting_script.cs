@@ -17,6 +17,7 @@ public class transmitting_script : MonoBehaviour
     Transform controller_trans;
     Transform used_transform;
 
+
     private OVRPlayerController player;
     private GameObject playerObj = null;
     public static double angle_from_beacon;
@@ -25,6 +26,9 @@ public class transmitting_script : MonoBehaviour
 
     public static bool outsideRange = false;
     public static bool showFlux = false;
+
+    public bool itemset = false;
+    public Lost_items LI;
 
     // Start is called before the first frame update
     public 
@@ -44,6 +48,11 @@ public class transmitting_script : MonoBehaviour
         playerObj = GameObject.FindWithTag("Player");
         player = playerObj.GetComponent<OVRPlayerController>();
         player_trans = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        GameObject body = GameObject.Find("Body");
+        body.transform.position = beaconPos + new Vector3(0f, -2f, 0f);
+
+        LI = gameObject.GetComponent<Lost_items>();
         //OVRInput.Update();
     }
 
@@ -59,6 +68,15 @@ public class transmitting_script : MonoBehaviour
                 RemoveFluxLines();
             }
             showFlux = !showFlux;
+        }
+
+        //GameObject.GetComponent<Lost_items>()
+
+
+        if (itemset == false && LI.loaded == true)
+        {
+            LI.SetItems(beaconPos + new Vector3(5f, 0f, 0f),beaconPos + new Vector3(0f, 0f, 5f),beaconPos + new Vector3(5f, 0f, 5f));
+            itemset = true;
         }
 
 
