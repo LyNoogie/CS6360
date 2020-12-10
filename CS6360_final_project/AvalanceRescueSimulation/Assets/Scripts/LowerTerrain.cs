@@ -50,7 +50,8 @@ public class LowerTerrain : MonoBehaviour
     void Update()
     {
         Player_script ps = player.GetComponent<Player_script>();
-        if (ps.CurrentTool == Player_script.SAFTEY_TOOL.SHOVEL)
+        //if (ps.CurrentTool == Player_script.SAFTEY_TOOL.SHOVEL)
+        if (true)
         {
 
 
