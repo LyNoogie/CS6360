@@ -67,7 +67,7 @@ public class LowerTerrain : MonoBehaviour
  
         else
         {
-            if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > .7)
+            if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > .8)
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Shovel_Controller.shovelPos);
