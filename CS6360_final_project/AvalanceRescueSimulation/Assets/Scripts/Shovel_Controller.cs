@@ -13,6 +13,7 @@ public class Shovel_Controller : MonoBehaviour
     public float pForward;
     public float pHeight = -0.3f;
     public bool pEquip;
+    public float sOffset = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Shovel_Controller : MonoBehaviour
         //this.transform.rotation = player.transform.rotation;
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
         this.transform.position = shovelPos;
+        sOffset = 1f;
 
     }
 
@@ -49,7 +51,7 @@ public class Shovel_Controller : MonoBehaviour
 
 
             //this.transform.position = t.position;
-            this.transform.position = new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z);
+            this.transform.position = new Vector3(t.transform.position.x, t.transform.position.y, t.transform.position.z) + t.forward * sOffset;
             this.transform.rotation = Quaternion.Euler(-t.transform.rotation.eulerAngles.x, t.transform.rotation.eulerAngles.y + 180f, -t.transform.rotation.eulerAngles.z);
 
 
