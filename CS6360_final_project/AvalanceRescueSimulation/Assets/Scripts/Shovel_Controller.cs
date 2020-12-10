@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Shovel_Controller : MonoBehaviour
 {
@@ -38,10 +39,10 @@ public class Shovel_Controller : MonoBehaviour
         //this.transform.rotation = player.transform.rotation;
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
         this.transform.position = shovelPos;
-        if (Input.GetJoystickNames().Length < 2)
-
+        if (!XRDevice.isPresent)
         {
-            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * pForward;
+
+                this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + player.transform.forward * pForward;
             this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
             //this.transform.Rotate(0f, 180f, 0f);
             //float yAngle = this.transform.rotation.eulerAngles.y - beaconAngle.eulerAngles.y;

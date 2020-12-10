@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class player_script : MonoBehaviour
 {
@@ -134,9 +135,9 @@ public class player_script : MonoBehaviour
             toggle_tool = true;
             Debug.Log("toggle pressed");
         }
-        if (Input.GetJoystickNames().Length >= 2)
-        {
-            toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
+        if (XRDevice.isPresent)
+            {
+                toggle_tool = OVRInput.GetUp(OVRInput.Button.SecondaryThumbstick);
 
         }
         if (toggle_tool)

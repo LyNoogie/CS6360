@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.XR;
 public class LowerTerrain : MonoBehaviour
 {
     public bool TestWithMouse = false;
@@ -47,22 +47,24 @@ public class LowerTerrain : MonoBehaviour
     void Update()
     {
         //if (player_script.CurrentTool == SAFTEY_TOOL.SHOVEL);
-        if (Input.GetJoystickNames().Length < 2)
-        {
-            //if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) 
-            //{
+        //if (Input.GetJoystickNames().Length < 2)
+        //{
+        if (!XRDevice.isPresent) {
+            if (Input.GetMouseButtonDown(0))
+            {
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-                if (Physics.Raycast (ray, out hit)) 
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
                 {
                     Debug.Log("clicked");
                     // area middle point x and z, area width, area height, smoothing distance, area height adjust
-                    raiselowerTerrainArea (hit.point, 1, 1, SmoothArea, 0.01f);
+                    raiselowerTerrainArea(hit.point, 1, 1, SmoothArea, 0.01f);
                     // area middle point x and z, area size, texture ID from terrain textures
-                    TextureDeformation (hit.point, 1 * 2f, 0);
+                    TextureDeformation(hit.point, 1 * 2f, 0);
                 }
-            //}
+            }
         }
+ 
         else
         {
             if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > .7)

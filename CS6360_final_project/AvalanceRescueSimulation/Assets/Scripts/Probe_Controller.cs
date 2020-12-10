@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.XR;
+
 public class Probe_Controller : MonoBehaviour
 {
     Vector3 probePos;

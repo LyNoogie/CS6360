@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using UnityEngine.XR;
 
 
 
@@ -62,9 +63,9 @@ public class transmitting_script : MonoBehaviour
 
 
         OVRInput.Update();
-        if (Input.GetJoystickNames().Length < 2)
+        if (!XRDevice.isPresent)
         {
-            used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+                used_transform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         }
         else
         {
