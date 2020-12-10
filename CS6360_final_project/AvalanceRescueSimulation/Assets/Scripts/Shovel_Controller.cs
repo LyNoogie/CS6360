@@ -66,5 +66,27 @@ public class Shovel_Controller : MonoBehaviour
             //this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
 
         }
+        Vector3 burriedPos = transmitting_script.beaconPos;        //bool is_triggered = false;
+        int rad = 1;
+        if (Vector3.Distance(burriedPos, shovelPos) < 1)
+        {
+            Debug.Log("Do something here");
+            GameObject.Find("FoundTargetCanvas").GetComponent<Canvas>().enabled = true;
+            GameObject.Find("FoundTargetCanvas").GetComponent<finalMenu>().EnterMenu();
+        }
     }
+
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    //Check for a match with the specified name on any GameObject that collides with your GameObject
+    //    //Debug.Log("collided with object ", collision.gameObject.transform.name.ToString());
+    //        Debug.Log("Do something here");
+    //        GameObject.Find("FoundTargetCanvas").GetComponent<Canvas>().enabled = true;
+    //        GameObject.Find("FoundTargetCanvas").GetComponent<finalMenu>().EnterMenu();
+    //    if (collision.gameObject.name == "Body")
+    //    {
+    //        //If the GameObject's name matches the one you suggest, output this message in the console
+
+    //    }
+    //}
 }
