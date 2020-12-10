@@ -19,7 +19,10 @@ public class Probe_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Transform player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
+        //updating this to match controller position instead of player position
+
         probePos = new Vector3(player.position.x, player.transform.position.y + pHeight, player.transform.position.z) + player.transform.forward * pForward;
         this.transform.rotation = player.transform.rotation;
         withinRange = false;
@@ -47,16 +50,30 @@ public class Probe_Controller : MonoBehaviour
         {
             isProbing = false;
         }
-        Transform player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
-        if (isProbing)
+
+
+        Transform player;
+        if (!XRDevice.isPresent)
         {
-            probePos = new Vector3(player.position.x, player.position.y + pHeight - 2f, player.position.z) + player.forward * pForward;
+            player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
+            player.position = player.position + player.forward * pForward;
         }
         else
         {
-            probePos = new Vector3(player.position.x, player.position.y + pHeight, player.position.z) + player.forward * pForward;
+            player = GameObject.Find("RightHandAnchor").GetComponent<Transform>();
+            Transform p = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
+            player.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        //this.transform.rotation = player.transform.rotation;
+        
+        if (isProbing)
+        {
+            probePos = new Vector3(player.position.x, player.position.y + pHeight - 2f, player.position.z); // + player.forward * pForward;
+        }
+        else
+        {
+            probePos = new Vector3(player.position.x, player.position.y + pHeight, player.position.z); // + player.forward * pForward;
+        }
+
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
         this.transform.position = probePos;
         //this.GetComponent<Renderer>().enabled = pEquip;

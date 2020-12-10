@@ -319,10 +319,10 @@ public class OVRPlayerController : MonoBehaviour
 
 		if (EnableLinearMovement)
 		{
-			bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+			bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)  || Input.GetAxis("Oculus_CrossPlatform_PrimaryThumbstickVertical") > 0.2f;
 			bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 			bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("Oculus_CrossPlatform_PrimaryThumbstickVertical") < -0.2f;
 
 			bool dpad_move = false;
 
@@ -355,7 +355,7 @@ public class OVRPlayerController : MonoBehaviour
 			float moveInfluence = Acceleration * 0.1f * MoveScale * MoveScaleMultiplier;
 
 			// Run!
-			if (dpad_move || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+			if (dpad_move || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || Input.GetAxis("Oculus_CrossPlatform_PrimaryIndexTrigger") > 0.1f)
 				moveInfluence *= 2.0f;
 
 			Quaternion ort = transform.rotation;
@@ -435,7 +435,7 @@ public class OVRPlayerController : MonoBehaviour
 
 			if (SnapRotation)
 			{
-				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) ||
+				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) || Input.GetAxis("Oculus_CrossPlatform_PrimaryThumbstickHorizontal") < -0.8f||
 					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
 				{
 					if (ReadyToSnapTurn)
@@ -444,7 +444,7 @@ public class OVRPlayerController : MonoBehaviour
 						ReadyToSnapTurn = false;
 					}
 				}
-				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) ||
+				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) || Input.GetAxis("Oculus_CrossPlatform_PrimaryThumbstickHorizontal") > 0.8f||
 					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
 				{
 					if (ReadyToSnapTurn)

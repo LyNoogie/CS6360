@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class player_script : MonoBehaviour
+public class Player_script : MonoBehaviour
 {
     public enum LEVEL
     {
@@ -118,7 +118,7 @@ public class player_script : MonoBehaviour
         }
 
         // set 
-        if (Input.GetKeyDown("h"))
+        if (Input.GetKeyDown("h") || Input.GetButtonDown("Oculus_CrossPlatform_Button4"))
         {
             inGameMenu.GetComponent<Canvas>().enabled = !inGameMenu.GetComponent<Canvas>().enabled;
         }
