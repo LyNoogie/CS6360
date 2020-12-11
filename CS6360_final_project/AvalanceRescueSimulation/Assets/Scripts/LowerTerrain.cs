@@ -16,7 +16,7 @@ public class LowerTerrain : MonoBehaviour
     protected int numOfAlphaLayers;
     private float[, ,] alphaMapBackup;
     public GameObject shovelObject;
-    public GameObject player;
+    public Player_script ps;
 
 
     void Start()
@@ -27,7 +27,8 @@ public class LowerTerrain : MonoBehaviour
         alphaMapHeight = myTerrain.terrainData.alphamapHeight;
         numOfAlphaLayers = myTerrain.terrainData.alphamapLayers;
 
-        player = GameObject.Find("OVRPlayerController");
+        GameObject player = GameObject.Find("OVRPlayerController");
+        ps = player.GetComponent<Player_script>();
     
         if (Debug.isDebugBuild)
         {
@@ -49,12 +50,13 @@ public class LowerTerrain : MonoBehaviour
 
     void Update()
     {
-        Player_script ps = player.GetComponent<Player_script>();
+        
+
         //if (ps.CurrentTool == Player_script.SAFTEY_TOOL.SHOVEL)
-        if (true)
+        if (GameObject.Find("ShovelContainer") != null)
         {
 
-
+            Debug.Log("EQUIPPED SHOVEL");
             //if (Input.GetJoystickNames().Length < 2)
             //{
             if (!XRDevice.isPresent) {

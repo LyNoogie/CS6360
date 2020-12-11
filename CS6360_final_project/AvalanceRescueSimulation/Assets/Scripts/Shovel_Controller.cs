@@ -66,9 +66,11 @@ public class Shovel_Controller : MonoBehaviour
             //this.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, player.transform.rotation.eulerAngles.y + 180f, player.transform.rotation.eulerAngles.z);
 
         }
+
+        GameObject body = GameObject.Find("Body");
         Vector3 burriedPos = transmitting_script.beaconPos;        //bool is_triggered = false;
         int rad = 1;
-        if (Vector3.Distance(burriedPos, shovelPos) < 1)
+        if (Vector3.Distance(body.transform.position, shovelPosForRay) < 0.3)
         {
             Debug.Log("Do something here");
             GameObject.Find("FoundTargetCanvas").GetComponent<Canvas>().enabled = true;

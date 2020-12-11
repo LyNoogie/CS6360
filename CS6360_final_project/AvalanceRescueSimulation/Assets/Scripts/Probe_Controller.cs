@@ -51,27 +51,32 @@ public class Probe_Controller : MonoBehaviour
             isProbing = false;
         }
 
+        
+        
 
         Transform player;
+        Vector3 ploc;
+
         if (!XRDevice.isPresent)
         {
             player = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
-            player.position = player.position + player.forward * pForward;
+            ploc = player.position + player.forward * pForward;
         }
         else
         {
             player = GameObject.Find("RightHandAnchor").GetComponent<Transform>();
+            ploc = player.position;
             Transform p = GameObject.Find("OVRCameraRig").GetComponent<Transform>();
             player.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         
         if (isProbing)
         {
-            probePos = new Vector3(player.position.x, player.position.y + pHeight - 2f, player.position.z); // + player.forward * pForward;
+            probePos = new Vector3(ploc.x, ploc.y + pHeight - 2f, ploc.z); // + player.forward * pForward;
         }
         else
         {
-            probePos = new Vector3(player.position.x, player.position.y + pHeight, player.position.z); // + player.forward * pForward;
+            probePos = new Vector3(ploc.x, ploc.y + pHeight, ploc.z); // + player.forward * pForward;
         }
 
         this.transform.rotation = Quaternion.Euler(player.rotation.eulerAngles.x, player.rotation.eulerAngles.y + 90f, player.rotation.eulerAngles.z);
