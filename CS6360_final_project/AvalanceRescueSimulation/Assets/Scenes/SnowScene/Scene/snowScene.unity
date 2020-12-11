@@ -2469,9 +2469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisibilityParam: 0
-  LevelType: 0
-  CurrentTool: 0
-  Speed: 0
   ShowFlux: 1
   settings_obj: {fileID: 449189379}
   SnowParticleSystem: {fileID: 425512605}
@@ -15876,7 +15873,6 @@ MonoBehaviour:
   myTerrain: {fileID: 1870407843}
   SmoothArea: 0
   DeformationTextureNum: 1
-  shovelObject: {fileID: 0}
   player: {fileID: 0}
 --- !u!1001 &1876671915
 PrefabInstance:
