@@ -10080,15 +10080,16 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Welcome to the avalanche rescue simulation project.\nThis is the help
-    menu. \n\nPress h to toggle this on/off.\n\nThe goal of this simulation is to
-    find the target body burried in snow. The user will have three tools, a beacon,
-    a probing stick and a shovel to locate and uncover the target.\n\n\nPlayer Control:\n\nToggle
-    Tools: \tPress C (keyboard) or xx (controller)\n\tSwitch among beacon, probe
-    and shovel modes.\n\nUse Tools:\tPress xx (keyboard) or xxx\n\tIn probe or shovel
-    mode, perform action to probe or dig.\n\tIn probe mode, when probed there will
-    be a flashing effect\n\twhen the target is underneath.\n\tIn shovel mode, every
-    dig will change the terrain surface \n\nToggle Timer Display: \tPress t (keyboard)\n\nQuit
-    to main menu: Press Esc (keyboard) or xxx (controller)\n"
+    menu. \n\nPress h (or \"B\" on the left VR controller) to toggle this on/off.\n\nThe
+    goal of this simulation is to find the target body burried in snow. The user
+    will have three tools, a beacon, a probing stick and a shovel to locate and uncover
+    the target.\n\n\nPlayer Control:\n\nToggle Tools: \tPress C (keyboard) or Right
+    Thumbstick (VR controller)\n\tSwitch among beacon, probe and shovel modes.\n\nUse
+    Tools:\tPress z (keyboard) or Right Thumbstick (VR controller)\n\tIn probe or
+    shovel mode, perform action to probe or dig.\n\tIn probe mode, when probed there
+    will be a flashing effect\n\twhen the target is underneath.\n\tIn shovel mode,
+    every dig will change the terrain surface \n\nToggle Timer Display: \tPress t
+    (keyboard)\n\nQuit to main menu: Press Esc (keyboard) \n"
 --- !u!222 &888177608
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11421,7 +11422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: -737.2, y: -324.09998}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192934461
@@ -12398,8 +12399,8 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1908901307}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PlaneDistance: 10
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -18335,7 +18336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6824608133389498014}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -2.78, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 7970603848353202188}

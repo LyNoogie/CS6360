@@ -23,11 +23,11 @@ public class Timer : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown("t") || Input.GetButtonDown("Oculus_CrossPlatform_Button4"))
+        if (Input.GetKeyDown("t") || Input.GetButtonDown("Oculus_CrossPlatform_Button2"))
         {
             display = !display;
         }
-        if (Input.GetKeyDown("h") || Input.GetButtonDown("Oculus_CrossPlatform_Button2"))
+        if (Input.GetKeyDown("h") || Input.GetButtonDown("Oculus_CrossPlatform_Button4"))
         {
             paused = !paused;
             if (paused)

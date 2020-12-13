@@ -75,7 +75,7 @@ public class transmitting_script : MonoBehaviour
 
         if (itemset == false && LI.loaded == true)
         {
-            LI.SetItems(beaconPos + new Vector3(5f, 0f, 0f),beaconPos + new Vector3(0f, 0f, 5f),beaconPos + new Vector3(5f, 0f, 5f));
+            LI.SetItems(beaconPos + new Vector3(25f, 0f, 0f),beaconPos + new Vector3(0f, 0f, 25f),beaconPos + new Vector3(25f, 0f, 15f));
             itemset = true;
         }
 
